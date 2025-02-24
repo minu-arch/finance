@@ -16,7 +16,7 @@ export default [
     index("../views/dashboard/dashboard.tsx"), 
     route("invoices", "../views/dashboard/invoices/invoices.tsx"),
     route("statistics", "../views/dashboard/statistics/statistics.tsx"),
-    route("apartaments", "../views/dashboard/apartaments/apartaments.tsx"),
+    route("apartments", "../views/dashboard/apartments/apartments.tsx"),
     route("owners", "../views/dashboard/owners/owners.tsx"),
     route("partners", "../views/dashboard/partners/partners.tsx"),
     route("accounting", "../views/dashboard/accounting/accounting.tsx"),

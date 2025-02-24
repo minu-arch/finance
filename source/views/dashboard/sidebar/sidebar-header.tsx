@@ -17,6 +17,7 @@ export default function DropdownHeader() {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton className="w-full font-muted-foreground">
               {selectedOption}
+              
               <ChevronDown className="ml-auto" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
@@ -29,6 +30,7 @@ export default function DropdownHeader() {
               <DropdownMenuItem
                 key={option}
                 onSelect={() => setSelectedOption(option)}
+                className="flex w-full justify-between gap-36 md:gap-28"
               >
                {option}
                   {option === selectedOption && <Check className="ml-auto" />}  

@@ -35,7 +35,10 @@
 			},
 			"a11y": {
 				"useKeyWithClickEvents": "off",
-				"noSvgWithoutTitle": "off"
+				"noSvgWithoutTitle": "off",
+				"noRedundantRoles": "off",
+				"useButtonType": "off",
+				"useValidAriaRole": "off"
 			}
 		}
 	}

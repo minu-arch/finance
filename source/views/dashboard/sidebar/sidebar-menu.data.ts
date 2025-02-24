@@ -30,7 +30,7 @@ export const menu = {
     },
     {
       title: "Apartamente",
-      url: "/dashboard/apartaments",
+      url: "/dashboard/apartments",
       icon: House,
     },
     {
