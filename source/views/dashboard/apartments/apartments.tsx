@@ -13,7 +13,7 @@ import {
 import { useId, useMemo, useRef, useState } from "react";
 import { columns } from "./columns";
 import { mockData, type Apartment } from "./data";
-import { Card, CardTitle, CardHeader, CardContent, CardFooter, CardDescription } from "@/theme/components/ui/card";
+import { Card, CardTitle, CardHeader, CardContent, CardFooter, CardDescription } from "@ui/card";
 import ApartmentsPagination from "./components/pagination/apartments-pagination";
 import ApartmentDescription from "./components/description/apartment-description";
 import ApartmentsFilters from "./components/filters/apartments-filters";
@@ -38,7 +38,6 @@ export default function Apartments() {
     },
   ]);
 
-  // 1. Primul pas: definim table
   const table = useReactTable({
     data: mockData,
     columns,
@@ -60,7 +59,6 @@ export default function Apartments() {
     },
   });
 
-  // 2. Al doilea pas: definim funcțiile care folosesc table
   const handleDeleteRows = () => {
     const selectedRows = table.getSelectedRowModel().rows;
     const updatedData = mockData.filter(

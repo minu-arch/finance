@@ -2,10 +2,10 @@ import { Badge } from "@ui/badge";
 import { Button } from "@ui/button";
 import { cn } from "@/theme/lib/utils";
 import type { Row } from "@tanstack/react-table";
-import type { Apartament } from "@/views/dashboard/apartaments/data";
+import type { Apartment } from "@/views/dashboard/apartments/data";
 
 interface StatusCellProps {
-  row: Row<Apartament>;
+  row: Row<Apartment>;
 }
 
 export default function StatusCell({ row }: StatusCellProps) {
@@ -25,10 +25,10 @@ export default function StatusCell({ row }: StatusCellProps) {
     >
       <Badge
         className={cn(
-          "cursor-pointer transition-colors",
+          "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium",
           status === "Ocupat" 
-            ? "bg-red-600 hover:bg-red-600/60 text-primary-foreground" 
-            : "bg-green-600 hover:bg-green-600/60 text-primary-foreground"
+            ? "bg-red-100 text-red-800" 
+            : "bg-green-100 text-green-800"
         )}
       >
         {status}
