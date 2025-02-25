@@ -1,61 +1,82 @@
-import { Card, CardDescription, CardTitle } from "@ui/card";
-import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@ui/table"
-import { mockData } from "./invoice.data"
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@ui/card"
+import {
+	flexRender,
+	getCoreRowModel,
+	getFilteredRowModel,
+	getPaginationRowModel,
+	useReactTable,
+	type ColumnFiltersState,
+	type PaginationState,
+	type RowSelectionState,
+} from "@tanstack/react-table"
+import { mockData, type Invoice } from "./invoice.data"
 import { invoiceColumns } from "./columns"
-import InvoiceDescription from "./components/description/invoice-description";
-
+import InvoiceDescription from "./components/description/invoice-description"
+import InvoiceFilters from "./components/filters/invoice-filters"
+import { useRef, useState } from "react"
+import TablePagination from "@/views/dashboard/components/table-pagination"
+import InvoiceTable from "./components/tabel/invoice-table"
 
 export default function Invoices() {
+	const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
+	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+	const [pagination, setPagination] = useState<PaginationState>({
+		pageIndex: 0,
+		pageSize: 5,
+	})
+	const table = useReactTable({
+		data: mockData,
+		columns: invoiceColumns,
+		getPaginationRowModel: getPaginationRowModel(),
+		getCoreRowModel: getCoreRowModel(),
+		getFilteredRowModel: getFilteredRowModel(),
+		onColumnFiltersChange: setColumnFilters,
+		onPaginationChange: setPagination,
+		onRowSelectionChange: setRowSelection,
+		state: {
+			columnFilters,
+			pagination,
+			rowSelection,
+		},
+		manualPagination: false,
+		pageCount: Math.ceil(mockData.length / pagination.pageSize),
+		enableRowSelection: true,
+		enableMultiRowSelection: true,
+	})
 
-const table = useReactTable({
-  data: mockData,
-  columns: invoiceColumns,
-  getCoreRowModel: getCoreRowModel(),
-})
+	// function to handle the deletion of the selected rows
+	const handleDeleteSelected = () => {
+		const selectedRows = table.getSelectedRowModel().rows
+		console.log("Selected rows:", selectedRows)
+		// Implement the logic for deleting the selected rows here
+	}
 
-return (
-  <div className="space-y-4 p-4 size-full mx-auto">
-    <Card className="size-full border-none shadow-none">
-    <CardTitle className="text-2xl font-bold">Invoices</CardTitle>
-    <CardDescription>
-      <InvoiceDescription />
-    </CardDescription>
-  <div className="rounded-md border">
-    <Table>
-      <TableHeader>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <TableRow key={headerGroup.id}>
-            {headerGroup.headers.map((header) => {
-              return (
-                <TableHead key={header.id}>
-                  {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                </TableHead>
-              )
-            })}
-          </TableRow>
-        ))}
-      </TableHeader>
-      <TableBody>
-        {table.getRowModel().rows?.length ? (
-          table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-              {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
-              ))}
-            </TableRow>
-          ))
-        ) : (
-          <TableRow>
-            <TableCell colSpan={invoiceColumns.length} className="h-24 text-center">
-              No results.
-            </TableCell>
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
-  </div>
-  </Card>
-  </div>
-)
+	const inputRef = useRef<HTMLInputElement>(null)
+
+	return (
+		<div className="space-y-4 p-4 size-full mx-auto">
+			<Card className="size-full border-none shadow-none">
+				<CardTitle className="text-2xl font-bold">Facturi</CardTitle>
+				<CardDescription>
+					<InvoiceDescription />
+				</CardDescription>
+				<CardHeader className="p-0">
+					<InvoiceFilters
+						table={table}
+						id="invoice"
+						inputRef={inputRef as React.RefObject<HTMLInputElement>}
+						handleDeleteSelected={handleDeleteSelected}
+					/>
+				</CardHeader>
+				<InvoiceTable table={table} />
+				<CardFooter className="block p-0">
+					<TablePagination<Invoice>
+						table={table}
+						id="invoice"
+						defaultPageSize={[5, 10, 20, 50, 100]}
+					/>
+				</CardFooter>
+			</Card>
+		</div>
+	)
 }
