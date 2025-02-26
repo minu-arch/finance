@@ -23,7 +23,7 @@ import {
 } from "@ui/card"
 import ApartmentDescription from "./components/description/apartment-description"
 import ApartmentsFilters from "./components/filters/apartments-filters"
-import { ApartmentsTabel } from "./components/tabel/apartments-tabel"
+import ApartmentsTable from "./components/tabel/apartments-table"
 import TablePagination from "@/views/dashboard/components/table-pagination"
 
 export default function Apartments() {
@@ -137,7 +137,7 @@ export default function Apartments() {
 				</CardHeader>
 				{/* Table */}
 				<CardContent className="p-0">
-					<ApartmentsTabel<Apartment> table={table} columns={columns} />
+					<ApartmentsTable table={table} columns={columns} />
 				</CardContent>
 				{/* Pagination */}
 				<CardFooter className="block p-0">
