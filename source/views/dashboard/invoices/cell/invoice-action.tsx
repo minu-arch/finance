@@ -1,5 +1,5 @@
-import { Pencil } from "lucide-react"
-import { Button } from "@/theme/components/ui/button"
+import { Pencil, Eye, Copy } from "lucide-react"
+import { Button } from "@ui/button"
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -7,35 +7,86 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@/theme/components/ui/dropdown-menu"
+} from "@ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react"
 import type { CellContext } from "@tanstack/react-table"
 import type { Invoice } from "../invoice.data"
+import { useState } from "react"
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogFooter,
+} from "@ui/dialog"
+import InvoiceModal from "@/views/dashboard/invoices/components/modal/invoice-modal/invoice-modal"
+import ModalModificareFactura from "@/views/dashboard/invoices/components/modal/edit-modal/invoice-edit-modal"
 
 export default function InvoiceAction({ row }: CellContext<Invoice, unknown>) {
 	const invoice = row.original
+	const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false)
+	// Stare pentru a controla deschiderea modalului de modificare
+	const [isModifyModalOpen, setIsModifyModalOpen] = useState(false)
 
 	return (
-		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" className="h-8 w-8 p-0">
-					<span className="sr-only">Open menu</span>
-					<MoreHorizontal className="h-4 w-4" />
-				</Button>
-			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end">
-				<DropdownMenuLabel>Actions</DropdownMenuLabel>
-				<DropdownMenuItem onClick={() => navigator.clipboard.writeText(invoice.id)}>
-					Copy invoice ID
-				</DropdownMenuItem>
-				<DropdownMenuSeparator />
-				<DropdownMenuItem>
-					<Pencil className="mr-2 h-4 w-4" />
-					Edit details
-				</DropdownMenuItem>
-				<DropdownMenuItem>Change status</DropdownMenuItem>
-				<DropdownMenuItem>Update due date</DropdownMenuItem>
-			</DropdownMenuContent>
-		</DropdownMenu>
+		<>
+			<DropdownMenu>
+				<DropdownMenuTrigger asChild>
+					<Button variant="ghost" className="h-8 w-8 p-0">
+						<span className="sr-only">Open menu</span>
+						<MoreHorizontal className="size-4" />
+					</Button>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent align="end">
+					<DropdownMenuLabel>Actions</DropdownMenuLabel>
+
+					<DropdownMenuSeparator />
+					<DropdownMenuItem
+						onClick={() => navigator.clipboard.writeText(invoice.invoiceNumber)}
+					>
+						<Copy className="mr-2 size-4" />
+						Copy invoice Number
+					</DropdownMenuItem>
+					<DropdownMenuItem onClick={() => setIsModifyModalOpen(true)}>
+						<Pencil className="mr-2 size-4" />
+						Edit details
+					</DropdownMenuItem>
+					<DropdownMenuItem onClick={() => setIsPreviewModalOpen(true)}>
+						<Eye className="mr-2 size-4" />
+						Preview invoice
+					</DropdownMenuItem>
+				</DropdownMenuContent>
+			</DropdownMenu>
+
+			{/* Modal pentru modificare factură */}
+			{isModifyModalOpen && (
+				<ModalModificareFactura
+					open={isModifyModalOpen}
+					onOpenChange={setIsModifyModalOpen}
+					invoice={invoice}
+				/>
+			)}
+
+			{/* Modal pentru previzualizare */}
+			<Dialog open={isPreviewModalOpen} onOpenChange={setIsPreviewModalOpen}>
+				<DialogContent className="max-w-4xl">
+					<DialogHeader>
+						<DialogTitle>Invoice #{invoice.invoiceNumber}</DialogTitle>
+					</DialogHeader>
+
+					{/* Conținutul modalului - template-ul de factură în modul de vizualizare */}
+					<div className="py-4">
+						<InvoiceModal invoice={invoice} />
+					</div>
+
+					<DialogFooter>
+						<Button variant="outline" onClick={() => setIsPreviewModalOpen(false)}>
+							Close
+						</Button>
+						<Button>Download PDF</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+		</>
 	)
 }

@@ -1,11 +1,12 @@
 export type Invoice = {
-	id: string
-	invoiceNumber: string
-	client: string
-	amount: number
-	status: "Paid" | "Pending" | "Overdue"
-	dueDate: string
-}
+		id: string
+		invoiceNumber: string
+		client: string
+		amount: number
+		status: "Paid" | "Pending" | "Overdue"
+		dueDate: string
+		apartmentId: string
+	}
 
 export const mockData: Invoice[] = [
 	{
@@ -15,6 +16,7 @@ export const mockData: Invoice[] = [
 		amount: 1000,
 		status: "Paid",
 		dueDate: "2023-05-15",
+		apartmentId: "1",
 	},
 	{
 		id: "2",
@@ -23,6 +25,7 @@ export const mockData: Invoice[] = [
 		amount: 1500,
 		status: "Pending",
 		dueDate: "2023-05-20",
+		apartmentId: "2",
 	},
 	{
 		id: "3",
@@ -31,6 +34,7 @@ export const mockData: Invoice[] = [
 		amount: 2000,
 		status: "Overdue",
 		dueDate: "2023-05-10",
+		apartmentId: "3",
 	},
 	{
 		id: "4",
@@ -39,6 +43,7 @@ export const mockData: Invoice[] = [
 		amount: 3000,
 		status: "Paid",
 		dueDate: "2023-05-25",
+		apartmentId: "4",
 	},
 	{
 		id: "5",
@@ -47,6 +52,7 @@ export const mockData: Invoice[] = [
 		amount: 2500,
 		status: "Pending",
 		dueDate: "2023-05-30",
+		apartmentId: "5",
 	},
 	{
 		id: "6",
@@ -55,6 +61,7 @@ export const mockData: Invoice[] = [
 		amount: 3500,
 		status: "Overdue",
 		dueDate: "2023-06-05",
+		apartmentId: "6",
 	},
 	{
 		id: "7",
@@ -63,6 +70,7 @@ export const mockData: Invoice[] = [
 		amount: 4000,
 		status: "Paid",
 		dueDate: "2023-06-10",
+		apartmentId: "7",
 	},
 	{
 		id: "8",
@@ -71,6 +79,7 @@ export const mockData: Invoice[] = [
 		amount: 4500,
 		status: "Pending",
 		dueDate: "2023-06-15",
+		apartmentId: "8",
 	},
 	{
 		id: "9",
@@ -79,6 +88,7 @@ export const mockData: Invoice[] = [
 		amount: 5000,
 		status: "Overdue",
 		dueDate: "2023-06-20",
+		apartmentId: "9",
 	},
 	{
 		id: "10",
@@ -87,6 +97,7 @@ export const mockData: Invoice[] = [
 		amount: 5500,
 		status: "Paid",
 		dueDate: "2023-06-25",
+		apartmentId: "10",
 	},
 	{
 		id: "11",
@@ -95,5 +106,6 @@ export const mockData: Invoice[] = [
 		amount: 6000,
 		status: "Pending",
 		dueDate: "2023-06-30",
+		apartmentId: "11",
 	},
 ]
