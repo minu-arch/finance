@@ -7,3 +7,9 @@
 
 # Cursor rules
 .cursorrules
+
+# Hono API
+/source/views/dashboard/apartments/index.ts
+
+# Axios API
+/source/views/dashboard/apartments/apartments.tsx

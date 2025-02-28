@@ -5,9 +5,11 @@ import {
 	getFilteredRowModel,
 	getPaginationRowModel,
 	useReactTable,
+	type ColumnDef,
 	type ColumnFiltersState,
 	type PaginationState,
 	type RowSelectionState,
+	type Table,
 } from "@tanstack/react-table"
 import { mockData, type Invoice } from "./invoice.data"
 import { invoiceColumns } from "./columns"
@@ -24,9 +26,9 @@ export default function Invoices() {
 		pageIndex: 0,
 		pageSize: 5,
 	})
-	const table = useReactTable({
+	const table = useReactTable<Invoice>({
 		data: mockData,
-		columns: invoiceColumns,
+		columns: invoiceColumns as ColumnDef<Invoice>[],
 		getPaginationRowModel: getPaginationRowModel(),
 		getCoreRowModel: getCoreRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),

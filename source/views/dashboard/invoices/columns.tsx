@@ -4,15 +4,8 @@ import InvoiceCurrency from "@/views/dashboard/invoices/cell/invoice-currency"
 import InvoiceStatus from "@/views/dashboard/invoices/cell/invoice-status"
 import InvoiceAction from "@/views/dashboard/invoices/cell/invoice-action"
 import HeaderCheckbox from "@/views/dashboard/components/header/header-checkbox"
+import type { Invoice } from "./invoice.data"
 
-interface Invoice {
-	id: string
-	invoiceNumber: string
-	client: string
-	amount: number
-	status: "Paid" | "Pending" | "Overdue"
-	dueDate: string
-}
 
 const multiColumnFilterFn: FilterFn<Invoice> = (row, columnId, filterValue) => {
 	const searchableRowContent =

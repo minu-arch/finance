@@ -1,15 +1,14 @@
 import { TableCell, TableRow, TableBody } from "@ui/table"
 import { invoiceColumns } from "@/views/dashboard/invoices/columns"
 import { flexRender } from "@tanstack/react-table"
-import type { Table, ColumnDef } from "@tanstack/react-table"
+import type { Table } from "@tanstack/react-table"
 import type { Invoice } from "@/views/dashboard/invoices/invoice.data"
 
 interface InvoiceTableBodyProps {
 	table: Table<Invoice>
-	columns: ColumnDef<Invoice>[]
 }
 
-export default function InvoiceTableBody({ table, columns }: InvoiceTableBodyProps) {
+export default function InvoiceTableBody({ table }: InvoiceTableBodyProps) {
 	return (
 		<TableBody>
 			{table.getRowModel().rows?.length ? (
