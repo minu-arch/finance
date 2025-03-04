@@ -4,6 +4,7 @@ import {
 	getCoreRowModel,
 	getFilteredRowModel,
 	getPaginationRowModel,
+	getSortedRowModel,
 	useReactTable,
 	type ColumnDef,
 	type ColumnFiltersState,
@@ -17,7 +18,7 @@ import InvoiceDescription from "./components/description/invoice-description"
 import InvoiceFilters from "./components/filters/invoice-filters"
 import { useRef, useState } from "react"
 import TablePagination from "@/views/dashboard/components/table-pagination"
-import InvoiceTable from "./components/tabel/invoice-table"
+import InvoiceTable from "./components/table/invoice-table"
 
 export default function Invoices() {
 	const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
@@ -35,6 +36,8 @@ export default function Invoices() {
 		onColumnFiltersChange: setColumnFilters,
 		onPaginationChange: setPagination,
 		onRowSelectionChange: setRowSelection,
+		enableSorting: true,
+		getSortedRowModel: getSortedRowModel(),
 		state: {
 			columnFilters,
 			pagination,

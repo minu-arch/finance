@@ -20,7 +20,7 @@ export const invoiceColumns: ColumnDef<Invoice>[] = [
 		header: HeaderCheckbox,
 		cell: CheckboxCell,
 		enableSorting: false,
-		enableHiding: false,
+		size: 25,
 	},
 	{
 		accessorKey: "invoiceNumber",

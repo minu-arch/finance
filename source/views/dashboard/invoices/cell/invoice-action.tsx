@@ -29,7 +29,7 @@ export default function InvoiceAction({ row }: CellContext<Invoice, unknown>) {
 	const [isModifyModalOpen, setIsModifyModalOpen] = useState(false)
 
 	return (
-		<>
+		<div className="flex justify-end">
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<Button variant="ghost" className="h-8 w-8 p-0">
@@ -87,6 +87,6 @@ export default function InvoiceAction({ row }: CellContext<Invoice, unknown>) {
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
-		</>
+		</div>
 	)
 }
