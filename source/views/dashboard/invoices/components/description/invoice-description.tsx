@@ -8,7 +8,7 @@ export default function InvoiceDescription() {
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Facturi Platite</CardTitle>
 				</CardHeader>
-				<CardContent className="pb-6">
+				<CardContent className="mb-2">
 					<div className="text-2xl font-bold">50 Ron</div>
 				</CardContent>
 			</Card>
@@ -16,7 +16,7 @@ export default function InvoiceDescription() {
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Facturi Neplătite</CardTitle>
 				</CardHeader>
-				<CardContent>
+				<CardContent className="mb-2">
 					<div className="text-2xl font-bold"> 100 Ron</div>
 				</CardContent>
 			</Card>
@@ -24,7 +24,7 @@ export default function InvoiceDescription() {
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Facturi Parțial Plătite</CardTitle>
 				</CardHeader>
-				<CardContent>
+				<CardContent className="mb-2">
 					<div className="text-2xl font-bold"> 150 </div>
 				</CardContent>
 			</Card>
@@ -32,7 +32,7 @@ export default function InvoiceDescription() {
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Total Facturi</CardTitle>
 				</CardHeader>
-				<CardContent>
+				<CardContent className="mb-2">
 					<div className="text-2xl font-bold"> 1000 RON</div>
 				</CardContent>
 			</Card>

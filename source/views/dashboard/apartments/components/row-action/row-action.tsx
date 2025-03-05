@@ -3,6 +3,7 @@ import {
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
+	DropdownMenuLabel,
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from "@ui/dropdown-menu"
@@ -45,21 +46,15 @@ export default function RowActions({ row }: { row: Row<Apartment> }) {
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end">
 					<DropdownMenuGroup>
+						<DropdownMenuLabel>Actions</DropdownMenuLabel>
+						<DropdownMenuSeparator />
 						<DropdownMenuItem onClick={() => setIsEditModalOpen(true)}>
 							<span>Edit</span>
 							<DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
 						</DropdownMenuItem>
-						<DropdownMenuItem>
-							<span>Duplicate</span>
-							<DropdownMenuShortcut>⌘D</DropdownMenuShortcut>
-						</DropdownMenuItem>
 					</DropdownMenuGroup>
 					<DropdownMenuSeparator />
 					<DropdownMenuGroup>
-						<DropdownMenuItem>
-							<span>Archive</span>
-							<DropdownMenuShortcut>⌘A</DropdownMenuShortcut>
-						</DropdownMenuItem>
 						<DropdownMenuSub>
 							<DropdownMenuSubTrigger>More</DropdownMenuSubTrigger>
 							<DropdownMenuPortal>
@@ -77,10 +72,6 @@ export default function RowActions({ row }: { row: Row<Apartment> }) {
 						<DropdownMenuItem>
 							<span>Share</span>
 							<DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-						</DropdownMenuItem>
-						<DropdownMenuItem>
-							<span>Add to favorites</span>
-							<DropdownMenuShortcut>⌘F</DropdownMenuShortcut>
 						</DropdownMenuItem>
 					</DropdownMenuGroup>
 					<DropdownMenuSeparator />
