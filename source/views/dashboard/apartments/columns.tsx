@@ -6,6 +6,7 @@ import RowActions from "@/views/dashboard/apartments/components/row-action/row-a
 import StatusCell from "@/views/dashboard/apartments/cell/status"
 import { format } from "date-fns"
 import HeaderCheckbox from "@/views/dashboard/components/header/header-checkbox"
+import DateCell from "./cell/date-cell"
 
 const multiColumnFilterFn: FilterFn<Apartment> = (row, columnId, filterValue) => {
 	const searchableRowContent =
@@ -69,21 +70,13 @@ export const columns: ColumnDef<Apartment>[] = [
 	{
 		header: "Check In",
 		accessorKey: "checkIn",
-		cell: ({ row }) => {
-			const date = row.getValue("checkIn")
-			if (!date) return "-"
-			return format(new Date(date as string), "dd/MM/yyyy")
-		},
+		cell: ({ row }) => <DateCell row={row} dateKey="checkIn" />,
 		size: 120,
 	},
 	{
 		header: "Check Out",
 		accessorKey: "checkOut",
-		cell: ({ row }) => {
-			const date = row.getValue("checkOut")
-			if (!date) return "-"
-			return format(new Date(date as string), "dd/MM/yyyy")
-		},
+		cell: ({ row }) => <DateCell row={row} dateKey="checkOut" />,
 		size: 120,
 	},
 	{
