@@ -6,17 +6,13 @@ import {
 	DropdownMenuTrigger,
 } from "@ui/dropdown-menu"
 import { MoreHorizontal, Eye } from "lucide-react"
-import type { Row } from "@tanstack/react-table"
+import type { CellContext } from "@tanstack/react-table"
 import type { ApartmentSummary } from "@/views/dashboard/expenses/expenses.data"
 import { useState } from "react"
 import ExpensePreviewModal from "@/views/dashboard/expenses/components/action/components/expenses-preview-modal"
 import { mockData } from "@/views/dashboard/expenses/expenses.data"
 
-interface ExpenseActionProps {
-	row: Row<ApartmentSummary>
-}
-
-export default function ExpenseAction({ row }: ExpenseActionProps) {
+export default function ExpenseAction({ row }: CellContext<ApartmentSummary, unknown>) {
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false)
 	const apartmentId = row.original.apartmentId
 

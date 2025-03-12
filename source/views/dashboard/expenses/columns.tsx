@@ -1,49 +1,35 @@
 import type { ColumnDef } from "@tanstack/react-table"
 import type { ApartmentSummary } from "@/views/dashboard/expenses/expenses.data"
-import { format } from "date-fns"
-import { ro } from "date-fns/locale"
 import ExpenseAction from "@/views/dashboard/expenses/components/action/expenses-action"
-import { Badge } from "@ui/badge"
+import CountCell from "./cell/count-cell"
+import AmountCell from "./cell/amount-cell"
+import ApartmentCell from "./cell/apartment-cell"
+import DateCell from "./cell/date-cell"
 
 export const columns: ColumnDef<ApartmentSummary>[] = [
 	{
 		header: "Apartament",
 		accessorKey: "apartmentId",
-		cell: ({ row }) => (
-			<div className="font-medium">
-				Apartament {row.original.apartmentId.replace("ap", "")}
-			</div>
-		),
+		cell: ApartmentCell,
 	},
 	{
 		header: "Ultima actualizare",
 		accessorKey: "lastExpenseDate",
-		cell: ({ row }) => {
-			const date = row.getValue("lastExpenseDate") as string
-			return date ? format(new Date(date), "dd MMMM yyyy", { locale: ro }) : "-"
-		},
+		cell: DateCell,
 	},
 	{
 		header: "Număr cheltuieli",
 		accessorKey: "expenseCount",
-		cell: ({ row }) => (
-			<Badge variant="secondary">{row.getValue("expenseCount")}</Badge>
-		),
+		cell: CountCell,
 	},
 	{
 		header: "Total cheltuieli",
 		accessorKey: "totalAmount",
-		cell: ({ row }) => {
-			const amount = row.getValue("totalAmount") as number
-			return new Intl.NumberFormat("ro-RO", {
-				style: "currency",
-				currency: "RON",
-			}).format(amount)
-		},
+		cell: AmountCell,
 	},
 	{
 		id: "actions",
-		cell: ({ row }) => <ExpenseAction row={row} />,
+		cell: ExpenseAction,
 		size: 60,
 	},
 ]
