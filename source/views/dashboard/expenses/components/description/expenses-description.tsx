@@ -6,7 +6,7 @@ import {
 	calculateTotalExpenses,
 	calculateApartmentExpenses,
 	calculateExpensesByCategory,
-} from "./expenses.data"
+} from "@/views/dashboard/expenses/expenses.data"
 
 export default function ExpenseDescription() {
 	const totalExpenses = calculateTotalExpenses(mockData)

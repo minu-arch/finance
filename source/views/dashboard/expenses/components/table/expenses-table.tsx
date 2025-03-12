@@ -7,8 +7,8 @@ import {
 	TableRow,
 } from "@ui/table"
 import { flexRender, type Table as TableType } from "@tanstack/react-table"
-import type { ApartmentSummary } from "./expenses.data"
-import { columns } from "./columns"
+import type { ApartmentSummary } from "@/views/dashboard/expenses/expenses.data"
+import { columns } from "@/views/dashboard/expenses/columns"
 
 interface ExpensesTableProps {
 	table: TableType<ApartmentSummary>
