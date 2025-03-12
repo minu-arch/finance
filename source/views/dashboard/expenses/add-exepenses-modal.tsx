@@ -46,7 +46,7 @@ export default function AddExpenseModal({
 
 	const handleSubmit = () => {
 		if (!formData.apartmentId || !formData.category || !formData.date) {
-			return // Adaugă validare
+			return // add validation
 		}
 
 		onSubmit({

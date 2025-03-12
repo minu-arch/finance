@@ -20,7 +20,7 @@ export default function ExpenseAction({ row }: ExpenseActionProps) {
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false)
 	const apartmentId = row.original.apartmentId
 
-	// Filtrăm cheltuielile pentru acest apartament
+	// filter expenses for this apartment
 	const apartmentExpenses = mockData.filter(
 		(expense) => expense.apartmentId === apartmentId,
 	)

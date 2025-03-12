@@ -6,11 +6,14 @@ import {
 	useReactTable,
 } from "@tanstack/react-table"
 import { Card, CardContent, CardHeader, CardTitle } from "@ui/card"
-import { columns } from "./columns"
-import { mockData, generateApartmentSummaries } from "./expenses.data"
-import ExpenseDescription from "./expenses-description"
-import ExpenseFilters from "./expenses-filters"
-import ExpensesTable from "./expenses-table"
+import { columns } from "@/views/dashboard/expenses/columns"
+import {
+	mockData,
+	generateApartmentSummaries,
+} from "@/views/dashboard/expenses/expenses.data"
+import ExpenseDescription from "@/views/dashboard/expenses/components/description/expenses-description"
+import ExpenseFilters from "@/views/dashboard/expenses/components/filters/expenses-filters"
+import ExpensesTable from "@/views/dashboard/expenses/components/table/expenses-table"
 
 export default function Expenses() {
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])

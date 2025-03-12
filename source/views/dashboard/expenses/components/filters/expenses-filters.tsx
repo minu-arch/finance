@@ -1,10 +1,10 @@
 import { Button } from "@ui/button"
 import { Plus } from "lucide-react"
 import type { Table } from "@tanstack/react-table"
-import type { ApartmentSummary, Expense } from "./expenses.data"
+import type { ApartmentSummary, Expense } from "../../expenses.data"
 import { useState } from "react"
-import AddExpenseModal from "./add-exepenses-modal"
-import { mockData } from "./expenses.data"
+import AddExpenseModal from "../../add-exepenses-modal"
+import { mockData } from "../../expenses.data"
 
 interface ExpenseFiltersProps {
 	table: Table<ApartmentSummary>
@@ -15,9 +15,9 @@ export default function ExpenseFilters({ table, onExpenseAdded }: ExpenseFilters
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	const handleAddExpense = (data: Expense) => {
-		// Adăugăm cheltuiala în mockData
+		// add expense to mockData
 		mockData.push(data)
-		// Notificăm componenta părinte că s-a adăugat o cheltuială
+		// refresh the table
 		onExpenseAdded()
 	}
 
