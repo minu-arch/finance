@@ -1,8 +1,8 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import type { ApartmentSummary } from "./expenses.data"
+import type { ApartmentSummary } from "@/views/dashboard/expenses/expenses.data"
 import { format } from "date-fns"
 import { ro } from "date-fns/locale"
-import ExpenseAction from "./expenses-action"
+import ExpenseAction from "@/views/dashboard/expenses/components/action/expenses-action"
 import { Badge } from "@ui/badge"
 
 export const columns: ColumnDef<ApartmentSummary>[] = [
