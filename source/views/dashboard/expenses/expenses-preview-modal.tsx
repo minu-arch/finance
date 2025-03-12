@@ -2,8 +2,40 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@ui/dialog"
 import { format } from "date-fns"
 import { ro } from "date-fns/locale"
 import { Badge } from "@ui/badge"
-import type { Expense } from "./expenses.data"
-import { getCategoryLabel, getCategoryVariant } from "./columns"
+import type { Expense, ExpenseCategory } from "./expenses.data"
+
+// Adăugăm funcțiile direct aici în loc să le importăm din columns
+const getCategoryVariant = (
+	category: ExpenseCategory,
+): "default" | "secondary" | "destructive" | "outline" => {
+	switch (category) {
+		case "utilities":
+			return "default"
+		case "maintenance":
+			return "secondary"
+		case "repairs":
+			return "destructive"
+		case "cleaning":
+			return "outline"
+		default:
+			return "default"
+	}
+}
+
+const getCategoryLabel = (category: ExpenseCategory): string => {
+	switch (category) {
+		case "utilities":
+			return "Utilități"
+		case "maintenance":
+			return "Întreținere"
+		case "repairs":
+			return "Reparații"
+		case "cleaning":
+			return "Curățenie"
+		default:
+			return "Altele"
+	}
+}
 
 interface ExpensePreviewModalProps {
 	open: boolean

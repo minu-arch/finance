@@ -15,6 +15,32 @@ export interface Expense {
 	receipt?: string
 }
 
+export interface ApartmentSummary {
+	apartmentId: string
+	totalAmount: number
+	lastExpenseDate: string
+	expenseCount: number
+}
+
+// Funcție pentru a genera sumarul apartamentelor
+export const generateApartmentSummaries = (expenses: Expense[]): ApartmentSummary[] => {
+	const apartments = ["ap101", "ap102", "ap103", "ap104"]
+
+	return apartments.map((apartmentId) => {
+		const apartmentExpenses = expenses.filter((exp) => exp.apartmentId === apartmentId)
+		const lastExpense = apartmentExpenses.sort(
+			(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+		)[0]
+
+		return {
+			apartmentId,
+			totalAmount: apartmentExpenses.reduce((sum, exp) => sum + exp.amount, 0),
+			lastExpenseDate: lastExpense?.date || "",
+			expenseCount: apartmentExpenses.length,
+		}
+	})
+}
+
 export const mockData: Expense[] = [
 	//  Apartment 101
 	{

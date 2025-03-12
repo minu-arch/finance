@@ -7,11 +7,11 @@ import {
 	TableRow,
 } from "@ui/table"
 import { flexRender, type Table as TableType } from "@tanstack/react-table"
-import type { Expense } from "./expenses.data"
+import type { ApartmentSummary } from "./expenses.data"
 import { columns } from "./columns"
 
 interface ExpensesTableProps {
-	table: TableType<Expense>
+	table: TableType<ApartmentSummary>
 }
 
 export default function ExpensesTable({ table }: ExpensesTableProps) {

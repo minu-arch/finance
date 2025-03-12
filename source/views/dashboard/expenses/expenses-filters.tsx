@@ -1,19 +1,24 @@
 import { Button } from "@ui/button"
 import { Plus } from "lucide-react"
 import type { Table } from "@tanstack/react-table"
-import type { Expense } from "./expenses.data"
+import type { ApartmentSummary, Expense } from "./expenses.data"
 import { useState } from "react"
 import AddExpenseModal from "./add-exepenses-modal"
+import { mockData } from "./expenses.data"
 
 interface ExpenseFiltersProps {
-	table: Table<Expense>
+	table: Table<ApartmentSummary>
+	onExpenseAdded: () => void
 }
 
-export default function ExpenseFilters({ table }: ExpenseFiltersProps) {
+export default function ExpenseFilters({ table, onExpenseAdded }: ExpenseFiltersProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
 	const handleAddExpense = (data: Expense) => {
-		console.log("Adding expense:", data)
+		// Adăugăm cheltuiala în mockData
+		mockData.push(data)
+		// Notificăm componenta părinte că s-a adăugat o cheltuială
+		onExpenseAdded()
 	}
 
 	return (

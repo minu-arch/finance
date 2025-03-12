@@ -7,20 +7,21 @@ import {
 } from "@ui/dropdown-menu"
 import { MoreHorizontal, Eye } from "lucide-react"
 import type { Row } from "@tanstack/react-table"
-import type { Expense } from "./expenses.data"
+import type { ApartmentSummary } from "./expenses.data"
 import { useState } from "react"
 import ExpensePreviewModal from "./expenses-preview-modal"
+import { mockData } from "./expenses.data"
 
 interface ExpenseActionProps {
-	row: Row<Expense>
-	expenses: Expense[]
+	row: Row<ApartmentSummary>
 }
 
-export default function ExpenseAction({ row, expenses }: ExpenseActionProps) {
+export default function ExpenseAction({ row }: ExpenseActionProps) {
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false)
 	const apartmentId = row.original.apartmentId
 
-	const apartmentExpenses = expenses.filter(
+	// Filtrăm cheltuielile pentru acest apartament
+	const apartmentExpenses = mockData.filter(
 		(expense) => expense.apartmentId === apartmentId,
 	)
 

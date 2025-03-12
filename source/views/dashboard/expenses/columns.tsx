@@ -1,89 +1,40 @@
 import type { ColumnDef } from "@tanstack/react-table"
-import type { Expense, ExpenseCategory } from "./expenses.data"
+import type { ApartmentSummary } from "./expenses.data"
 import { format } from "date-fns"
 import { ro } from "date-fns/locale"
 import ExpenseAction from "./expenses-action"
 import { Badge } from "@ui/badge"
-import CheckboxCell from "@/views/dashboard/components/cell/checkbox"
-import HeaderCheckbox from "@/views/dashboard/components/header/header-checkbox"
-import { mockData } from "./expenses.data"
 
-export const getCategoryVariant = (
-	category: ExpenseCategory,
-): "default" | "secondary" | "destructive" | "outline" => {
-	switch (category) {
-		case "utilities":
-			return "default"
-		case "maintenance":
-			return "secondary"
-		case "repairs":
-			return "destructive"
-		case "cleaning":
-			return "outline"
-		default:
-			return "default"
-	}
-}
-
-export const getCategoryLabel = (category: ExpenseCategory): string => {
-	switch (category) {
-		case "utilities":
-			return "Utilități"
-		case "maintenance":
-			return "Întreținere"
-		case "repairs":
-			return "Reparații"
-		case "cleaning":
-			return "Curățenie"
-		default:
-			return "Altele"
-	}
-}
-
-export const columns: ColumnDef<Expense>[] = [
-	{
-		id: "select",
-		header: HeaderCheckbox,
-		cell: CheckboxCell,
-		enableSorting: false,
-		size: 28,
-	},
+export const columns: ColumnDef<ApartmentSummary>[] = [
 	{
 		header: "Apartament",
 		accessorKey: "apartmentId",
 		cell: ({ row }) => (
-			<div className="font-medium">Apartament {row.getValue("apartmentId")}</div>
+			<div className="font-medium">
+				Apartament {row.original.apartmentId.replace("ap", "")}
+			</div>
 		),
 	},
 	{
-		header: "Data",
-		accessorKey: "date",
+		header: "Ultima actualizare",
+		accessorKey: "lastExpenseDate",
 		cell: ({ row }) => {
-			const date = row.getValue("date") as string
-			return format(new Date(date), "dd MMMM yyyy", { locale: ro })
+			const date = row.getValue("lastExpenseDate") as string
+			return date ? format(new Date(date), "dd MMMM yyyy", { locale: ro }) : "-"
 		},
 	},
 	{
-		header: "Categorie",
-		accessorKey: "category",
-		cell: ({ row }) => {
-			const category = row.getValue("category") as ExpenseCategory
-			return (
-				<Badge variant={getCategoryVariant(category)}>
-					{getCategoryLabel(category)}
-				</Badge>
-			)
-		},
+		header: "Număr cheltuieli",
+		accessorKey: "expenseCount",
+		cell: ({ row }) => (
+			<Badge variant="secondary">{row.getValue("expenseCount")}</Badge>
+		),
 	},
 	{
-		header: "Descriere",
-		accessorKey: "description",
-	},
-	{
-		header: "Sumă",
-		accessorKey: "amount",
+		header: "Total cheltuieli",
+		accessorKey: "totalAmount",
 		cell: ({ row }) => {
-			const amount = row.getValue("amount") as number
+			const amount = row.getValue("totalAmount") as number
 			return new Intl.NumberFormat("ro-RO", {
 				style: "currency",
 				currency: "RON",
@@ -92,7 +43,7 @@ export const columns: ColumnDef<Expense>[] = [
 	},
 	{
 		id: "actions",
-		cell: ({ row }) => <ExpenseAction row={row} expenses={mockData} />,
+		cell: ({ row }) => <ExpenseAction row={row} />,
 		size: 60,
 	},
 ]

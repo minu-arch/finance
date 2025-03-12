@@ -23,7 +23,8 @@ import { ro } from "date-fns/locale"
 import { CalendarIcon } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@ui/popover"
 import { cn } from "@/theme/lib/utils"
-import type { Expense } from "./expenses.data"
+import type { Expense, ExpenseCategory } from "./expenses.data"
+
 interface AddExpenseModalProps {
 	open: boolean
 	onOpenChange: (open: boolean) => void
@@ -35,7 +36,30 @@ export default function AddExpenseModal({
 	onOpenChange,
 	onSubmit,
 }: AddExpenseModalProps) {
-	const [date, setDate] = useState<Date>()
+	const [formData, setFormData] = useState({
+		apartmentId: "",
+		category: "",
+		description: "",
+		amount: "",
+		date: undefined as Date | undefined,
+	})
+
+	const handleSubmit = () => {
+		if (!formData.apartmentId || !formData.category || !formData.date) {
+			return // Adaugă validare
+		}
+
+		onSubmit({
+			id: crypto.randomUUID(),
+			apartmentId: formData.apartmentId,
+			category: formData.category as ExpenseCategory,
+			description: formData.description,
+			amount: Number.parseFloat(formData.amount) || 0,
+			date: format(formData.date, "yyyy-MM-dd"),
+		})
+
+		onOpenChange(false)
+	}
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
@@ -49,22 +73,30 @@ export default function AddExpenseModal({
 				<div className="grid gap-4 py-4">
 					<div className="grid gap-2">
 						<Label htmlFor="apartment">Apartament</Label>
-						<Select>
+						<Select
+							value={formData.apartmentId}
+							onValueChange={(value) =>
+								setFormData({ ...formData, apartmentId: value })
+							}
+						>
 							<SelectTrigger>
 								<SelectValue placeholder="Selectează apartamentul" />
 							</SelectTrigger>
 							<SelectContent>
-								<SelectItem value="101">Apartament 101</SelectItem>
-								<SelectItem value="102">Apartament 102</SelectItem>
-								<SelectItem value="103">Apartament 103</SelectItem>
-								<SelectItem value="104">Apartament 104</SelectItem>
+								<SelectItem value="ap101">Apartament 101</SelectItem>
+								<SelectItem value="ap102">Apartament 102</SelectItem>
+								<SelectItem value="ap103">Apartament 103</SelectItem>
+								<SelectItem value="ap104">Apartament 104</SelectItem>
 							</SelectContent>
 						</Select>
 					</div>
 
 					<div className="grid gap-2">
 						<Label htmlFor="category">Categorie</Label>
-						<Select>
+						<Select
+							value={formData.category}
+							onValueChange={(value) => setFormData({ ...formData, category: value })}
+						>
 							<SelectTrigger>
 								<SelectValue placeholder="Selectează categoria" />
 							</SelectTrigger>
@@ -80,12 +112,25 @@ export default function AddExpenseModal({
 
 					<div className="grid gap-2">
 						<Label htmlFor="description">Descriere</Label>
-						<Input id="description" placeholder="Ex: Schimbare capac WC" />
+						<Input
+							id="description"
+							value={formData.description}
+							onChange={(e) =>
+								setFormData({ ...formData, description: e.target.value })
+							}
+							placeholder="Ex: Schimbare capac WC"
+						/>
 					</div>
 
 					<div className="grid gap-2">
 						<Label htmlFor="amount">Sumă (RON)</Label>
-						<Input id="amount" type="number" placeholder="100" />
+						<Input
+							id="amount"
+							type="number"
+							value={formData.amount}
+							onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
+							placeholder="100"
+						/>
 					</div>
 
 					<div className="grid gap-2">
@@ -96,18 +141,20 @@ export default function AddExpenseModal({
 									variant="outline"
 									className={cn(
 										"justify-start text-left font-normal",
-										!date && "text-muted-foreground",
+										!formData.date && "text-muted-foreground",
 									)}
 								>
 									<CalendarIcon className="mr-2 h-4 w-4" />
-									{date ? format(date, "PPP", { locale: ro }) : "Alege data"}
+									{formData.date
+										? format(formData.date, "PPP", { locale: ro })
+										: "Alege data"}
 								</Button>
 							</PopoverTrigger>
 							<PopoverContent className="w-auto p-0">
 								<Calendar
 									mode="single"
-									selected={date}
-									onSelect={setDate}
+									selected={formData.date}
+									onSelect={(date) => setFormData({ ...formData, date })}
 									locale={ro}
 								/>
 							</PopoverContent>
@@ -118,21 +165,7 @@ export default function AddExpenseModal({
 					<Button onClick={() => onOpenChange(false)} variant="outline">
 						Anulează
 					</Button>
-					<Button
-						onClick={() => {
-							onSubmit({
-								id: "",
-								apartmentId: "",
-								category: "other",
-								description: "",
-								amount: 0,
-								date: date ? format(date, "yyyy-MM-dd") : "",
-							})
-							onOpenChange(false)
-						}}
-					>
-						Salvează
-					</Button>
+					<Button onClick={handleSubmit}>Salvează</Button>
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>
