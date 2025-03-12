@@ -1,8 +1,10 @@
 import { useState } from "react"
 import {
 	type ColumnFiltersState,
+	type SortingState,
 	getCoreRowModel,
 	getFilteredRowModel,
+	getSortedRowModel,
 	useReactTable,
 } from "@tanstack/react-table"
 import { Card, CardContent, CardHeader, CardTitle } from "@ui/card"
@@ -17,7 +19,7 @@ import ExpensesTable from "@/views/dashboard/expenses/components/table/expenses-
 
 export default function Expenses() {
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-	const [rowSelection, setRowSelection] = useState({})
+	const [sorting, setSorting] = useState<SortingState>([])
 	const [refreshKey, setRefreshKey] = useState(0)
 
 	const apartmentSummaries = generateApartmentSummaries(mockData)
@@ -27,16 +29,16 @@ export default function Expenses() {
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
+		getSortedRowModel: getSortedRowModel(),
 		onColumnFiltersChange: setColumnFilters,
-		onRowSelectionChange: setRowSelection,
-		enableRowSelection: true,
+		onSortingChange: setSorting,
+		enableSorting: true,
 		state: {
 			columnFilters,
-			rowSelection,
+			sorting,
 		},
 	})
 
-	// function to refresh the table when an expense is added
 	const handleExpenseAdded = () => {
 		setRefreshKey((prev) => prev + 1)
 	}
