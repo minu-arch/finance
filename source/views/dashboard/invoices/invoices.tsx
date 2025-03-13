@@ -1,6 +1,5 @@
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@ui/card"
 import {
-	flexRender,
 	getCoreRowModel,
 	getFilteredRowModel,
 	getPaginationRowModel,
@@ -10,32 +9,50 @@ import {
 	type ColumnFiltersState,
 	type PaginationState,
 	type RowSelectionState,
-	type Table,
 } from "@tanstack/react-table"
-import { mockData, type Invoice } from "./invoice.data"
-import { invoiceColumns } from "./columns"
-import InvoiceDescription from "./components/description/invoice-description"
-import InvoiceFilters from "./components/filters/invoice-filters"
-import { useRef, useState } from "react"
+import { mockData, type Invoice } from "@/views/dashboard/invoices/invoice.data"
+import { invoiceColumns } from "@/views/dashboard/invoices/columns"
+import InvoiceDescription from "@/views/dashboard/invoices/components/description/invoice-description"
+import InvoiceFilters from "@/views/dashboard/invoices/components/filters/invoice-filters"
+import { useRef, useState, useEffect } from "react"
 import TablePagination from "@/views/dashboard/components/table-pagination"
-import InvoiceTable from "./components/table/invoice-table"
+import InvoiceTable from "@/views/dashboard/invoices/components/table/invoice-table"
 
 export default function Invoices() {
+	// Add a state to check if the component is mounted
+	const [isMounted, setIsMounted] = useState(false)
 	const [rowSelection, setRowSelection] = useState<RowSelectionState>({})
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 	const [pagination, setPagination] = useState<PaginationState>({
 		pageIndex: 0,
 		pageSize: 5,
 	})
+
+	// check if the component is mounted
+	useEffect(() => {
+		setIsMounted(true)
+		return () => {
+			setIsMounted(false)
+		}
+	}, [])
+
+	// create the table only if the component is mounted
+	// this prevents updates on unmounted components
 	const table = useReactTable<Invoice>({
 		data: mockData,
 		columns: invoiceColumns as ColumnDef<Invoice>[],
 		getPaginationRowModel: getPaginationRowModel(),
 		getCoreRowModel: getCoreRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
-		onColumnFiltersChange: setColumnFilters,
-		onPaginationChange: setPagination,
-		onRowSelectionChange: setRowSelection,
+		onColumnFiltersChange: (value) => {
+			if (isMounted) setColumnFilters(value)
+		},
+		onPaginationChange: (value) => {
+			if (isMounted) setPagination(value)
+		},
+		onRowSelectionChange: (value) => {
+			if (isMounted) setRowSelection(value)
+		},
 		enableSorting: true,
 		getSortedRowModel: getSortedRowModel(),
 		state: {
@@ -51,6 +68,8 @@ export default function Invoices() {
 
 	// function to handle the deletion of the selected rows
 	const handleDeleteSelected = () => {
+		if (!isMounted) return
+
 		const selectedRows = table.getSelectedRowModel().rows
 		console.log("Selected rows:", selectedRows)
 		// Implement the logic for deleting the selected rows here

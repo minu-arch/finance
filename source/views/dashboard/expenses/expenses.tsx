@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect, useMemo } from "react"
 import {
 	type ColumnFiltersState,
 	type SortingState,
@@ -22,8 +22,15 @@ export default function Expenses() {
 	const [sorting, setSorting] = useState<SortingState>([])
 	const [refreshKey, setRefreshKey] = useState(0)
 
-	const apartmentSummaries = generateApartmentSummaries(mockData)
+	// use memo for calculate apartmentSummaries ,this prevents recalculation at every render
+	const apartmentSummaries = useMemo(() => {
+		// force recalculation when refreshKey changes
+		console.log("calculate apartmentSummaries, refreshKey:", refreshKey)
+		return generateApartmentSummaries(mockData)
+	}, [refreshKey]) // refreshKey is needed to force recalculation when an expense is added
 
+	// create table using useReactTable directly at the top level of the component
+	// we don't use useMemo to wrap useReactTable, because it violates the rules of hooks
 	const table = useReactTable({
 		data: apartmentSummaries,
 		columns,
@@ -39,6 +46,7 @@ export default function Expenses() {
 		},
 	})
 
+	// function to update data when a new expense is added
 	const handleExpenseAdded = () => {
 		setRefreshKey((prev) => prev + 1)
 	}

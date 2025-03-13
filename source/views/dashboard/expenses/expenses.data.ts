@@ -22,7 +22,7 @@ export interface ApartmentSummary {
 	expenseCount: number
 }
 
-// Funcție pentru a genera sumarul apartamentelor
+// function to generate apartment summaries
 export const generateApartmentSummaries = (expenses: Expense[]): ApartmentSummary[] => {
 	const apartments = ["ap101", "ap102", "ap103", "ap104"]
 

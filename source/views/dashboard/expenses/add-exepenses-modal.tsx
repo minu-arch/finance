@@ -31,11 +31,17 @@ interface AddExpenseModalProps {
 	onSubmit: (data: Expense) => void
 }
 
+// Funcție pentru generarea ID-urilor
+const generateId = () => {
+	return Date.now().toString() + Math.floor(Math.random() * 1000).toString()
+}
+
 export default function AddExpenseModal({
 	open,
 	onOpenChange,
 	onSubmit,
 }: AddExpenseModalProps) {
+	// initialize formData with default values
 	const [formData, setFormData] = useState({
 		apartmentId: "",
 		category: "",
@@ -44,25 +50,52 @@ export default function AddExpenseModal({
 		date: undefined as Date | undefined,
 	})
 
+	// function to reset the form
+	const resetForm = () => {
+		setFormData({
+			apartmentId: "",
+			category: "",
+			description: "",
+			amount: "",
+			date: undefined,
+		})
+	}
+
+	// handle the closing of the modal
+	const handleOpenChange = (newOpen: boolean) => {
+		if (!newOpen) {
+			resetForm()
+		}
+		onOpenChange(newOpen)
+	}
+
+	// handle the submission of the form
 	const handleSubmit = () => {
+		// basic validation
 		if (!formData.apartmentId || !formData.category || !formData.date) {
-			return // add validation
+			alert("Te rugăm să completezi toate câmpurile obligatorii!")
+			return
 		}
 
-		onSubmit({
-			id: crypto.randomUUID(),
+		// create the expense object
+		const expense: Expense = {
+			id: generateId(),
 			apartmentId: formData.apartmentId,
 			category: formData.category as ExpenseCategory,
 			description: formData.description,
 			amount: Number.parseFloat(formData.amount) || 0,
 			date: format(formData.date, "yyyy-MM-dd"),
-		})
+		}
 
-		onOpenChange(false)
+		// send the data
+		onSubmit(expense)
+
+		// close the modal
+		handleOpenChange(false)
 	}
 
 	return (
-		<Dialog open={open} onOpenChange={onOpenChange}>
+		<Dialog open={open} onOpenChange={handleOpenChange}>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>
 					<DialogTitle>Adaugă cheltuială nouă</DialogTitle>
@@ -154,7 +187,9 @@ export default function AddExpenseModal({
 								<Calendar
 									mode="single"
 									selected={formData.date}
-									onSelect={(date) => setFormData({ ...formData, date })}
+									onSelect={(date) =>
+										setFormData({ ...formData, date: date || undefined })
+									}
 									locale={ro}
 								/>
 							</PopoverContent>
@@ -162,7 +197,7 @@ export default function AddExpenseModal({
 					</div>
 				</div>
 				<DialogFooter>
-					<Button onClick={() => onOpenChange(false)} variant="outline">
+					<Button onClick={() => handleOpenChange(false)} variant="outline">
 						Anulează
 					</Button>
 					<Button onClick={handleSubmit}>Salvează</Button>

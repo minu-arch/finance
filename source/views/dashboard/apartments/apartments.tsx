@@ -1,40 +1,28 @@
 import {
 	type ColumnFiltersState,
-	type PaginationState,
 	type SortingState,
 	type VisibilityState,
 	getCoreRowModel,
 	getFacetedUniqueValues,
 	getFilteredRowModel,
-	getPaginationRowModel,
 	getSortedRowModel,
 	useReactTable,
+	type Column,
 } from "@tanstack/react-table"
-import { useId, useMemo, useRef, useState } from "react"
+import { useId, useMemo, useRef, useState, useEffect } from "react"
 import { columns } from "./columns"
 import { mockData, type Apartment } from "./data"
-import {
-	Card,
-	CardTitle,
-	CardHeader,
-	CardContent,
-	CardFooter,
-	CardDescription,
-} from "@ui/card"
+import { Card, CardTitle, CardHeader, CardContent, CardDescription } from "@ui/card"
 import ApartmentDescription from "./components/description/apartment-description"
 import ApartmentsFilters from "./components/filters/apartments-filters"
 import ApartmentsTable from "./components/tabel/apartments-table"
-import TablePagination from "@/views/dashboard/components/table-pagination"
 
 export default function Apartments() {
 	const id = useId()
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-	const [pagination, setPagination] = useState<PaginationState>({
-		pageIndex: 0,
-		pageSize: 5,
-	})
 	const inputRef = useRef<HTMLInputElement>(null)
+	const [rowSelection, setRowSelection] = useState({})
 
 	const [sorting, setSorting] = useState<SortingState>([
 		{
@@ -50,20 +38,17 @@ export default function Apartments() {
 		getSortedRowModel: getSortedRowModel(),
 		onSortingChange: setSorting,
 		enableSortingRemoval: false,
-		getPaginationRowModel: getPaginationRowModel(),
-		onPaginationChange: setPagination,
 		onColumnFiltersChange: setColumnFilters,
 		onColumnVisibilityChange: setColumnVisibility,
+		onRowSelectionChange: setRowSelection,
 		getFilteredRowModel: getFilteredRowModel(),
 		getFacetedUniqueValues: getFacetedUniqueValues(),
 		state: {
 			sorting,
-			pagination,
 			columnFilters,
 			columnVisibility,
+			rowSelection,
 		},
-		manualPagination: false,
-		pageCount: Math.ceil(mockData.length / pagination.pageSize),
 	})
 
 	const handleDeleteRows = () => {
@@ -72,46 +57,61 @@ export default function Apartments() {
 			(item) => !selectedRows.some((row) => row.original.id === item.id),
 		)
 		console.log("Deleted rows:", updatedData)
-		table.resetRowSelection()
+
+		setRowSelection({})
 	}
+	const [statusColumn, setStatusColumn] = useState<Column<Apartment, unknown> | null>(
+		null,
+	)
+
+	useEffect(() => {
+		const column = table.getColumn("status")
+		if (column) {
+			setStatusColumn(column)
+		}
+	}, [table])
 
 	// Get unique status values
-	const uniqueStatusValues = useMemo(() => {
-		const statusColumn = table.getColumn("status")
+	const uniqueStatusValues = useMemo((): string[] => {
 		if (!statusColumn) return []
 		const values = Array.from(statusColumn.getFacetedUniqueValues().keys())
-		return values.sort()
-	}, [table])
+		return values.map((value) => String(value)).sort()
+	}, [statusColumn])
 
 	// Get counts for each status
 	const statusCounts = useMemo(() => {
-		const statusColumn = table.getColumn("status")
-		if (!statusColumn) return new Map()
-		return statusColumn.getFacetedUniqueValues()
-	}, [table])
+		if (!statusColumn) return new Map<string, number>()
+		return statusColumn.getFacetedUniqueValues() as Map<string, number>
+	}, [statusColumn])
 
-	const selectedStatuses = useMemo(() => {
-		const statusColumn = table.getColumn("status")
-		const filterValue = statusColumn?.getFilterValue() as string[]
+	const selectedStatuses = useMemo((): string[] => {
+		if (!statusColumn) return []
+		const filterValue = statusColumn.getFilterValue() as string[]
 		return filterValue ?? []
-	}, [table])
+	}, [statusColumn])
 
 	const handleStatusChange = (checked: boolean, value: string) => {
-		const filterValue = table.getColumn("status")?.getFilterValue() as string[]
-		const newFilterValue = filterValue ? [...filterValue] : []
+		if (!statusColumn) return
 
-		if (checked) {
-			newFilterValue.push(value)
-		} else {
-			const index = newFilterValue.indexOf(value)
-			if (index > -1) {
-				newFilterValue.splice(index, 1)
+		// we check if the status is already in the filter value
+		const currentFilterValue = (statusColumn.getFilterValue() as string[]) || []
+		const valueExists = currentFilterValue.includes(value)
+
+		// we update only if it is necessary
+		if ((checked && !valueExists) || (!checked && valueExists)) {
+			const newFilterValue = [...currentFilterValue]
+
+			if (checked) {
+				newFilterValue.push(value)
+			} else {
+				const index = newFilterValue.indexOf(value)
+				if (index > -1) {
+					newFilterValue.splice(index, 1)
+				}
 			}
-		}
 
-		table
-			.getColumn("status")
-			?.setFilterValue(newFilterValue.length ? newFilterValue : undefined)
+			statusColumn.setFilterValue(newFilterValue.length ? newFilterValue : undefined)
+		}
 	}
 
 	return (
@@ -139,14 +139,6 @@ export default function Apartments() {
 				<CardContent className="p-0">
 					<ApartmentsTable table={table} columns={columns} />
 				</CardContent>
-				{/* Pagination */}
-				<CardFooter className="block p-0">
-					<TablePagination<Apartment>
-						table={table}
-						id="apartment"
-						defaultPageSize={[5, 10, 20, 50, 100]}
-					/>
-				</CardFooter>
 			</Card>
 		</div>
 	)

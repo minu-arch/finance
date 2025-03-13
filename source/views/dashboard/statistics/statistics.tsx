@@ -5,10 +5,40 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/theme/components/ui/card"
-import { GridLayout } from "../components/grid-layout"
+import { GridLayout } from "@/views/dashboard/components/grid-layout"
 import { ChartBarIncreasing, FileText, Tag, ListOrdered } from "lucide-react"
-import PieChartComponent from "./pie-chart"
+import PieChartComponent from "@/views/dashboard/statistics/pie-chart"
+import { useState, useEffect } from "react"
+
 export default function Statistics() {
+	// TODO: fix the warning of message channel when implementing backend
+	// Warning: Uncaught (in promise) Error: A listener indicated...
+	const [isMounted, setIsMounted] = useState(true)
+
+	useEffect(() => {
+		// set the flag when the component is mounted
+		setIsMounted(true)
+
+		// clear the flag when the component is unmounted
+		return () => {
+			setIsMounted(false)
+		}
+	}, [])
+
+	const fetchData = async () => {
+		try {
+			const response = await fetch("/api/data")
+			// check if the component is mounted
+			if (isMounted) {
+				const data = await response.json()
+				// process the data only if the component is mounted
+			}
+		} catch (error) {
+			if (isMounted) {
+				console.error("Error fetching data:", error)
+			}
+		}
+	}
 	return (
 		<div className="space-y-4 p-4 size-full mx-auto">
 			<CardTitle className="text-2xl font-bold">Statistici</CardTitle>
