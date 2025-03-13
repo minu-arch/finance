@@ -28,6 +28,8 @@ export default function Invoices() {
 		pageSize: 5,
 	})
 
+	const [data, setData] = useState(mockData)
+
 	// check if the component is mounted
 	useEffect(() => {
 		setIsMounted(true)
@@ -39,7 +41,7 @@ export default function Invoices() {
 	// create the table only if the component is mounted
 	// this prevents updates on unmounted components
 	const table = useReactTable<Invoice>({
-		data: mockData,
+		data,
 		columns: invoiceColumns as ColumnDef<Invoice>[],
 		getPaginationRowModel: getPaginationRowModel(),
 		getCoreRowModel: getCoreRowModel(),
@@ -61,7 +63,7 @@ export default function Invoices() {
 			rowSelection,
 		},
 		manualPagination: false,
-		pageCount: Math.ceil(mockData.length / pagination.pageSize),
+		pageCount: Math.ceil(data.length / pagination.pageSize),
 		enableRowSelection: true,
 		enableMultiRowSelection: true,
 	})
@@ -77,6 +79,10 @@ export default function Invoices() {
 
 	const inputRef = useRef<HTMLInputElement>(null)
 
+	const handleAddInvoice = (newInvoice: Invoice) => {
+		setData((prevData) => [...prevData, newInvoice])
+	}
+
 	return (
 		<div className="space-y-4 p-4 size-full mx-auto">
 			<Card className="size-full border-none shadow-none">
@@ -90,6 +96,7 @@ export default function Invoices() {
 						id="invoice"
 						inputRef={inputRef as React.RefObject<HTMLInputElement>}
 						handleDeleteSelected={handleDeleteSelected}
+						onAddInvoice={handleAddInvoice}
 					/>
 				</CardHeader>
 				<InvoiceTable table={table} />

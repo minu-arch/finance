@@ -1,12 +1,18 @@
-export type Invoice = {
-		id: string
-		invoiceNumber: string
-		client: string
-		amount: number
-		status: "Paid" | "Pending" | "Overdue"
-		dueDate: string
-		apartmentId: string
-	}
+export type InvoiceStatus = "Paid" | "Pending" | "Overdue"
+
+export interface Invoice {
+	id: string
+	invoiceNumber: string
+	client: string
+	amount: number
+	status: InvoiceStatus
+	dueDate: string
+	apartmentId: string
+}
+
+export interface NewInvoice extends Omit<Invoice, "id"> {
+	id?: string
+}
 
 export const mockData: Invoice[] = [
 	{

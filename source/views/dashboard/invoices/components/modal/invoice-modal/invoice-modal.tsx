@@ -22,11 +22,11 @@ export default function InvoiceModal({ invoice }: InvoiceModalProps) {
 	}
 
 	return (
-		<div className="max-w-3xl mx-auto p-8 bg-white">
+		<div className="max-w-3xl mx-auto bg-white">
 			<CardHeader className="text-center">
 				<CardTitle className="text-3xl font-bold">FACTURĂ</CardTitle>
 			</CardHeader>
-			<CardContent>
+			<CardContent className="p-0">
 				<InvoiceModalHeader invoice={invoiceData} />
 				<InvoiceModalContent invoice={invoiceData} />
 				<Separator className="my-6" />

@@ -10,6 +10,7 @@ interface InvoiceFiltersProps {
 	id: string
 	inputRef: React.RefObject<HTMLInputElement>
 	handleDeleteSelected: () => void
+	onAddInvoice: (invoice: Invoice) => void
 }
 
 export default function InvoiceFilters({
@@ -17,6 +18,7 @@ export default function InvoiceFilters({
 	id,
 	inputRef,
 	handleDeleteSelected,
+	onAddInvoice,
 }: InvoiceFiltersProps) {
 	return (
 		<div className="flex items-center justify-between gap-3">
@@ -26,7 +28,7 @@ export default function InvoiceFilters({
 				{/* Filter by Status */}
 				<InvoiceStatusByFilter table={table} />
 				{/* Add Invoice */}
-				<InvoiceAddInvoice table={table} />
+				<InvoiceAddInvoice table={table} onAddInvoice={onAddInvoice} />
 				{/* Delete Invoice */}
 				<InvoiceDeleteButton
 					table={table}

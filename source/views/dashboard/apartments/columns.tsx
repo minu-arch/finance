@@ -3,10 +3,13 @@ import type { ColumnDef, FilterFn, Row } from "@tanstack/react-table"
 import { mockData, type Apartment } from "@/views/dashboard/apartments/data"
 import CheckboxCell from "@/views/dashboard/components/cell/checkbox"
 import RowActions from "@/views/dashboard/apartments/components/row-action/row-action"
-import StatusCell from "@/views/dashboard/apartments/cell/status"
+import StatusCell from "@/views/dashboard/apartments/cell/status-cell"
 import { format } from "date-fns"
 import HeaderCheckbox from "@/views/dashboard/components/header/header-checkbox"
 import DateCell from "./cell/date-cell"
+import PriceCell from "@/views/dashboard/apartments/cell/price-cell"
+import FullnameCell from "@/views/dashboard/apartments/cell/fullname-cell"
+import HeaderAction from "@/views/dashboard/apartments/cell/header-action"
 
 const multiColumnFilterFn: FilterFn<Apartment> = (row, columnId, filterValue) => {
 	const searchableRowContent =
@@ -38,7 +41,7 @@ export const columns: ColumnDef<Apartment>[] = [
 	{
 		header: "Name",
 		accessorKey: "name",
-		cell: ({ row }) => <div className="font-medium">{row.getValue("name")}</div>,
+		cell: FullnameCell,
 		size: 180,
 		filterFn: multiColumnFilterFn,
 		enableHiding: false,
@@ -51,17 +54,14 @@ export const columns: ColumnDef<Apartment>[] = [
 	{
 		header: "Status",
 		accessorKey: "status",
-		cell: ({ row }) => <StatusCell row={row} />,
+		cell: StatusCell,
 		size: 100,
 		filterFn: statusFilterFn,
 	},
 	{
 		header: "Price",
 		accessorKey: "price",
-		cell: ({ row }) => {
-			const amount = Number(row.getValue("price"))
-			return `${amount} €`
-		},
+		cell: PriceCell,
 	},
 	{
 		header: "Rooms",
@@ -81,8 +81,8 @@ export const columns: ColumnDef<Apartment>[] = [
 	},
 	{
 		id: "actions",
-		header: () => <span className="sr-only">Actions</span>,
-		cell: ({ row }) => <RowActions row={row} />,
+		header: HeaderAction,
+		cell: RowActions,
 		size: 60,
 		enableHiding: false,
 	},
