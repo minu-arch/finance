@@ -6,7 +6,7 @@ import {
 	CardTitle,
 } from "@/theme/components/ui/card"
 import { GridLayout } from "@/views/dashboard/components/grid-layout"
-import { ChartBarIncreasing, FileText, Tag, ListOrdered } from "lucide-react"
+import { ChartBarIncreasing, FileText, Tag, HandCoins, Hotel } from "lucide-react"
 import PieChartComponent from "@/views/dashboard/statistics/pie-chart"
 import { useState, useEffect } from "react"
 
@@ -80,7 +80,7 @@ export default function Statistics() {
 								<CardHeader>
 									<div className="flex flex-col items-start gap-2">
 										<div className="rounded-full bg-orange-300 p-2">
-											<ListOrdered className="size-4" />
+											<Hotel className="size-4" />
 										</div>
 										<CardTitle className="text-sm line-clamp-2 dark:text-black">
 											Total Apart.
@@ -132,7 +132,7 @@ export default function Statistics() {
 								<CardHeader>
 									<div className="flex flex-col items-start gap-2">
 										<div className="rounded-full bg-violet-300 p-2">
-											<FileText className="size-4" />
+											<HandCoins className="size-4" />
 										</div>
 										<CardTitle className="text-sm line-clamp-1 dark:text-black">
 											Total Cheltuieli

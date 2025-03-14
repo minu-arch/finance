@@ -69,9 +69,15 @@ export default function InvoiceAction({ row }: CellContext<Invoice, unknown>) {
 
 			{/* Modal pentru previzualizare */}
 			<Dialog open={isPreviewModalOpen} onOpenChange={setIsPreviewModalOpen}>
-				<DialogContent className="max-w-4xl">
-					<DialogHeader>
-						<DialogTitle>Invoice #{invoice.invoiceNumber}</DialogTitle>
+				<DialogContent
+					className="max-w-4xl"
+					aria-describedby="Invoice Preview"
+					aria-labelledby="Invoice Preview"
+				>
+					<DialogHeader aria-describedby="Header" aria-labelledby="Header">
+						<DialogTitle aria-describedby="Title" aria-labelledby="Title">
+							Invoice #{invoice.invoiceNumber}
+						</DialogTitle>
 					</DialogHeader>
 
 					{/* Conținutul modalului - template-ul de factură în modul de vizualizare */}

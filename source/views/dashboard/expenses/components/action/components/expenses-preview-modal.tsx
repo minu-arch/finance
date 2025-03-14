@@ -52,9 +52,15 @@ export default function ExpensePreviewModal({
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogContent className="max-w-2xl">
-				<DialogHeader>
-					<DialogTitle>Cheltuieli Apartament {apartmentId}</DialogTitle>
+			<DialogContent
+				className="max-w-2xl"
+				aria-describedby="Cheltuieli Apartament"
+				aria-labelledby="Cheltuieli Apartament"
+			>
+				<DialogHeader aria-describedby="Header" aria-labelledby="Header">
+					<DialogTitle aria-describedby="Title" aria-labelledby="Title">
+						Cheltuieli Apartament {apartmentId}
+					</DialogTitle>
 				</DialogHeader>
 
 				<div className="space-y-6">

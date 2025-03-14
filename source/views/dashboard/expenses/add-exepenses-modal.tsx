@@ -24,6 +24,7 @@ import { CalendarIcon } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@ui/popover"
 import { cn } from "@/theme/lib/utils"
 import type { Expense, ExpenseCategory } from "./expenses.data"
+import { VisuallyHidden } from "../components/visually-hidden"
 
 interface AddExpenseModalProps {
 	open: boolean
@@ -31,7 +32,7 @@ interface AddExpenseModalProps {
 	onSubmit: (data: Expense) => void
 }
 
-// Funcție pentru generarea ID-urilor
+// function to generate the id
 const generateId = () => {
 	return Date.now().toString() + Math.floor(Math.random() * 1000).toString()
 }
@@ -96,10 +97,19 @@ export default function AddExpenseModal({
 
 	return (
 		<Dialog open={open} onOpenChange={handleOpenChange}>
-			<DialogContent className="sm:max-w-[425px]">
-				<DialogHeader>
-					<DialogTitle>Adaugă cheltuială nouă</DialogTitle>
-					<DialogDescription>
+			<DialogContent
+				className="sm:max-w-[425px]"
+				aria-describedby="Adaugă cheltuială nouă"
+				aria-labelledby="Adaugă cheltuială nouă"
+			>
+				<DialogHeader aria-describedby="Header" aria-labelledby="Header">
+					<DialogTitle aria-describedby="Title" aria-labelledby="Title">
+						Adaugă cheltuială nouă
+					</DialogTitle>
+					<DialogDescription
+						aria-describedby="Description"
+						aria-labelledby="Description"
+					>
 						Adaugă o nouă cheltuială pentru apartament
 					</DialogDescription>
 				</DialogHeader>
@@ -196,11 +206,18 @@ export default function AddExpenseModal({
 						</Popover>
 					</div>
 				</div>
-				<DialogFooter>
-					<Button onClick={() => handleOpenChange(false)} variant="outline">
+				<DialogFooter aria-describedby="Footer" aria-labelledby="Footer">
+					<Button
+						onClick={() => handleOpenChange(false)}
+						variant="outline"
+						aria-describedby="Cancel"
+						aria-labelledby="Cancel"
+					>
 						Anulează
 					</Button>
-					<Button onClick={handleSubmit}>Salvează</Button>
+					<Button onClick={handleSubmit} aria-describedby="Save" aria-labelledby="Save">
+						Salvează
+					</Button>
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

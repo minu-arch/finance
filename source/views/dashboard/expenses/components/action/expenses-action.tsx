@@ -25,8 +25,8 @@ export default function ExpenseAction({ row }: CellContext<ApartmentSummary, unk
 		<>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
-					<Button variant="ghost" className="h-8 w-8 p-0">
-						<MoreHorizontal className="h-4 w-4" />
+					<Button variant="ghost" className="size-8 p-0">
+						<MoreHorizontal className="size-4" />
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end">
@@ -34,7 +34,7 @@ export default function ExpenseAction({ row }: CellContext<ApartmentSummary, unk
 						className="flex items-center gap-2"
 						onClick={() => setIsPreviewOpen(true)}
 					>
-						<Eye className="h-4 w-4" />
+						<Eye className="size-4" />
 						<span>Vezi cheltuieli</span>
 					</DropdownMenuItem>
 				</DropdownMenuContent>

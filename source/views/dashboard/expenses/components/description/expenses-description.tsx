@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@ui/card"
 import { GridLayout } from "@/views/dashboard/components/grid-layout"
-import { Wallet, Building2, Receipt, TrendingUp } from "lucide-react"
+import { Wallet, Building2, Receipt, TrendingUp, HandCoins } from "lucide-react"
 import {
 	mockData,
 	calculateTotalExpenses,
@@ -42,7 +42,7 @@ export default function ExpenseDescription() {
 				<CardHeader>
 					<div className="flex flex-col items-start gap-2">
 						<div className="rounded-full bg-orange-300 p-2">
-							<Building2 className="size-4" />
+							<HandCoins className="size-4" />
 						</div>
 						<CardTitle className="text-sm font-medium dark:text-black">
 							Cheltuieli Ap.101
@@ -64,7 +64,7 @@ export default function ExpenseDescription() {
 				<CardHeader>
 					<div className="flex flex-col items-start gap-2">
 						<div className="rounded-full bg-green-300 p-2">
-							<Receipt className="size-4" />
+							<Building2 className="size-4" />
 						</div>
 						<CardTitle className="text-sm font-medium dark:text-black">
 							Utilități

@@ -28,7 +28,11 @@ export default function EditModal({
 
 	return (
 		<Dialog open={isOpen} onOpenChange={onClose}>
-			<DialogContent className="sm:max-w-[425px]">
+			<DialogContent
+				className="sm:max-w-[425px]"
+				aria-describedby="Editare Apartament"
+				aria-labelledby="Editare Apartament"
+			>
 				<ModalHeader />
 				<form onSubmit={handleSubmit}>
 					<ModalForm formData={formData} setFormData={setFormData} />

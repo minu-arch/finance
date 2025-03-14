@@ -1,4 +1,11 @@
-import { SquareTerminal, Users2, Users, DollarSign, ListTodo } from "lucide-react"
+import {
+	SquareTerminal,
+	Users2,
+	Users,
+	DollarSign,
+	ListTodo,
+	HandCoins,
+} from "lucide-react"
 import { Receipt, ChartNetwork, House } from "lucide-react"
 
 export type MenuItem = {
@@ -36,7 +43,7 @@ export const menu = {
 		},
 		{
 			title: "Cheltuieli",
-			icon: Users2,
+			icon: HandCoins,
 			url: "/dashboard/expenses",
 		},
 		{
