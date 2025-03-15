@@ -6,7 +6,7 @@ import type {
 	Expense,
 } from "@/views/dashboard/expenses/expenses.data"
 import { useState, useCallback } from "react"
-import AddExpenseModal from "@/views/dashboard/expenses/add-exepenses-modal"
+import ExpensesModal from "@/views/dashboard/expenses/components/add-expenses/add-exepenses-modal"
 import { mockData } from "@/views/dashboard/expenses/expenses.data"
 
 interface ExpenseFiltersProps {
@@ -47,7 +47,7 @@ export default function ExpenseFilters({ table, onExpenseAdded }: ExpenseFilters
 				Adaugă cheltuială
 			</Button>
 
-			<AddExpenseModal
+			<ExpensesModal
 				open={isModalOpen}
 				onOpenChange={setIsModalOpen}
 				onSubmit={handleAddExpense}
