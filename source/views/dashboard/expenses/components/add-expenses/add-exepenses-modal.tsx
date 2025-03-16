@@ -1,29 +1,16 @@
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-} from "@ui/dialog"
+import { Dialog, DialogContent } from "@ui/dialog"
 import { useState } from "react"
 import { format } from "date-fns"
-import type { Expense, ExpenseCategory } from "../../expenses.data"
+import { ro } from "date-fns/locale"
+import type { Expense, ExpenseCategory, ExpenseFormData } from "./expenses.types"
 import ExpensesModalFooter from "./expenses-modal-footer"
 import ExpensesModalMain from "./expenses-modal-main"
+import ExpensesModalHeader from "./expenses-modal-header"
 
 interface AddExpenseModalProps {
 	open: boolean
 	onOpenChange: (open: boolean) => void
 	onSubmit: (data: Expense) => void
-}
-
-// Definim interfața pentru formData
-interface ExpenseFormData {
-	apartmentId: string
-	category: string
-	description: string
-	amount: string
-	date?: Date
 }
 
 // function to generate the id
@@ -79,7 +66,7 @@ export default function AddExpenseModal({
 			category: formData.category as ExpenseCategory,
 			description: formData.description,
 			amount: Number.parseFloat(formData.amount) || 0,
-			date: format(formData.date, "yyyy-MM-dd"),
+			date: format(formData.date, "yyyy-MM-dd", { locale: ro }),
 		}
 
 		// send the data
@@ -96,21 +83,8 @@ export default function AddExpenseModal({
 				aria-describedby="Adaugă cheltuială nouă"
 				aria-labelledby="Adaugă cheltuială nouă"
 			>
-				<DialogHeader aria-describedby="Header" aria-labelledby="Header">
-					<DialogTitle aria-describedby="Title" aria-labelledby="Title">
-						Adaugă cheltuială nouă
-					</DialogTitle>
-					<DialogDescription
-						aria-describedby="Description"
-						aria-labelledby="Description"
-					>
-						Adaugă o nouă cheltuială pentru apartament
-					</DialogDescription>
-				</DialogHeader>
-				<ExpensesModalMain
-					formData={formData}
-					setFormData={(newData) => setFormData(newData as ExpenseFormData)}
-				/>
+				<ExpensesModalHeader />
+				<ExpensesModalMain formData={formData} setFormData={setFormData} />
 				<ExpensesModalFooter
 					handleOpenChange={handleOpenChange}
 					handleSubmit={handleSubmit}

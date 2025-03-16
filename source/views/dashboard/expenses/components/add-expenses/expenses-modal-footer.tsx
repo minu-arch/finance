@@ -1,5 +1,5 @@
-import { Button } from "@/theme/components/ui/button"
-import { DialogFooter } from "@/theme/components/ui/dialog"
+import { Button } from "@ui/button"
+import { DialogFooter } from "@ui/dialog"
 
 export default function ExpensesModalFooter({
 	handleOpenChange,
