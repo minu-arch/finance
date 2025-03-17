@@ -1,22 +1,9 @@
 import { useState, useEffect } from "react"
 import { Button } from "@ui/button"
-import {
-	Dialog,
-	DialogContent,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@ui/dialog"
-import { Input } from "@ui/input"
-import { Label } from "@ui/label"
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@ui/select"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@ui/dialog"
 import type { Invoice } from "@/views/dashboard/invoices/invoice.data"
+import InvoiceEditModalInput from "./components/invoice-edit-modal-input"
+import InvoiceEditModalSelect from "./components/invoice-edit-modal-select"
 
 interface ModalEditInvoiceProps {
 	open: boolean
@@ -88,98 +75,16 @@ export default function ModalEditInvoice({
 				<DialogHeader aria-describedby="Header" aria-labelledby="Header">
 					<DialogTitle>Modifică Factura</DialogTitle>
 				</DialogHeader>
+
 				<form onSubmit={handleSubmit} className="grid gap-4 py-4">
-					<div className="grid grid-cols-4 items-center gap-4">
-						<Label htmlFor="serieNumar" className="text-right">
-							Serie/Număr
-						</Label>
-						<Input
-							id="serieNumar"
-							name="serieNumar"
-							value={formData.serieNumar}
-							onChange={handleInputChange}
-							className="col-span-3"
-						/>
-					</div>
-					<div className="grid grid-cols-4 items-center gap-4">
-						<Label htmlFor="client" className="text-right">
-							Client
-						</Label>
-						<Input
-							id="client"
-							name="client"
-							value={formData.client}
-							onChange={handleInputChange}
-							className="col-span-3"
-						/>
-					</div>
-					<div className="grid grid-cols-4 items-center gap-4">
-						<Label htmlFor="apartament" className="text-right">
-							Apartament
-						</Label>
-						<Input
-							id="apartament"
-							name="apartament"
-							value={formData.apartament}
-							onChange={handleInputChange}
-							className="col-span-3"
-						/>
-					</div>
-					<div className="grid grid-cols-4 items-center gap-4">
-						<Label htmlFor="dataEmiterii" className="text-right">
-							Data Emiterii
-						</Label>
-						<Input
-							id="dataEmiterii"
-							name="dataEmiterii"
-							type="date"
-							value={formData.dataEmiterii}
-							onChange={handleInputChange}
-							className="col-span-3"
-						/>
-					</div>
-					<div className="grid grid-cols-4 items-center gap-4">
-						<Label htmlFor="dataScadentei" className="text-right">
-							Data Scadenței
-						</Label>
-						<Input
-							id="dataScadentei"
-							name="dataScadentei"
-							type="date"
-							value={formData.dataScadentei}
-							onChange={handleInputChange}
-							className="col-span-3"
-						/>
-					</div>
-					<div className="grid grid-cols-4 items-center gap-4">
-						<Label htmlFor="total" className="text-right">
-							Total
-						</Label>
-						<Input
-							id="total"
-							name="total"
-							type="number"
-							step="0.01"
-							value={formData.total}
-							onChange={handleInputChange}
-							className="col-span-3"
-						/>
-					</div>
-					<div className="grid grid-cols-4 items-center gap-4">
-						<Label htmlFor="status" className="text-right">
-							Status
-						</Label>
-						<Select onValueChange={handleSelectChange} defaultValue={formData.status}>
-							<SelectTrigger className="col-span-3">
-								<SelectValue placeholder="Selectează statusul" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="Platita">Plătită</SelectItem>
-								<SelectItem value="Neplatita">Neplătită</SelectItem>
-								<SelectItem value="Anulata">Anulată</SelectItem>
-							</SelectContent>
-						</Select>
-					</div>
+					<InvoiceEditModalInput
+						handleInputChange={handleInputChange}
+						formData={formData}
+					/>
+					<InvoiceEditModalSelect
+						handleSelectChange={handleSelectChange}
+						formData={formData}
+					/>
 					<Button type="submit" className="mt-4">
 						Salvează modificările
 					</Button>

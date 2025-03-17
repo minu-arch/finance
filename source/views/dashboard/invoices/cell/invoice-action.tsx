@@ -58,7 +58,7 @@ export default function InvoiceAction({ row }: CellContext<Invoice, unknown>) {
 				</DropdownMenuContent>
 			</DropdownMenu>
 
-			{/* Modal pentru modificare factură */}
+			{/* Modal for invoice modification */}
 			{isModifyModalOpen && (
 				<ModalModificareFactura
 					open={isModifyModalOpen}
@@ -67,7 +67,6 @@ export default function InvoiceAction({ row }: CellContext<Invoice, unknown>) {
 				/>
 			)}
 
-			{/* Modal pentru previzualizare */}
 			<Dialog open={isPreviewModalOpen} onOpenChange={setIsPreviewModalOpen}>
 				<DialogContent
 					className="max-w-4xl"
@@ -80,7 +79,6 @@ export default function InvoiceAction({ row }: CellContext<Invoice, unknown>) {
 						</DialogTitle>
 					</DialogHeader>
 
-					{/* Conținutul modalului - template-ul de factură în modul de vizualizare */}
 					<div className="py-4">
 						<InvoiceModal invoice={invoice} />
 					</div>
