@@ -20,9 +20,9 @@ export default function InvoiceEditModalInput({
 	handleInputChange,
 }: InvoiceEditInputProps) {
 	return (
-		<div>
-			<div className="grid grid-cols-4 items-center gap-4">
-				<Label htmlFor="serieNumar" className="text-right">
+		<div className="flex flex-col gap-4">
+			<div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-2 sm:gap-4">
+				<Label htmlFor="serieNumar" className="sm:text-right">
 					Serie/Număr
 				</Label>
 				<Input
@@ -33,8 +33,8 @@ export default function InvoiceEditModalInput({
 					className="col-span-3"
 				/>
 			</div>
-			<div className="grid grid-cols-4 items-center gap-4">
-				<Label htmlFor="client" className="text-right">
+			<div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-2 sm:gap-4">
+				<Label htmlFor="client" className="sm:text-right">
 					Client
 				</Label>
 				<Input
@@ -45,8 +45,8 @@ export default function InvoiceEditModalInput({
 					className="col-span-3"
 				/>
 			</div>
-			<div className="grid grid-cols-4 items-center gap-4">
-				<Label htmlFor="apartament" className="text-right">
+			<div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-2 sm:gap-4">
+				<Label htmlFor="apartament" className="sm:text-right">
 					Apartament
 				</Label>
 				<Input
@@ -57,8 +57,8 @@ export default function InvoiceEditModalInput({
 					className="col-span-3"
 				/>
 			</div>
-			<div className="grid grid-cols-4 items-center gap-4">
-				<Label htmlFor="dataEmiterii" className="text-right">
+			<div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-2 sm:gap-4">
+				<Label htmlFor="dataEmiterii" className="sm:text-right">
 					Data Emiterii
 				</Label>
 				<Input
@@ -70,8 +70,8 @@ export default function InvoiceEditModalInput({
 					className="col-span-3"
 				/>
 			</div>
-			<div className="grid grid-cols-4 items-center gap-4">
-				<Label htmlFor="dataScadentei" className="text-right">
+			<div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-2 sm:gap-4">
+				<Label htmlFor="dataScadentei" className="sm:text-right">
 					Data Scadenței
 				</Label>
 				<Input
@@ -83,8 +83,8 @@ export default function InvoiceEditModalInput({
 					className="col-span-3"
 				/>
 			</div>
-			<div className="grid grid-cols-4 items-center gap-4">
-				<Label htmlFor="total" className="text-right">
+			<div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-2 sm:gap-4">
+				<Label htmlFor="total" className="sm:text-right">
 					Total
 				</Label>
 				<Input

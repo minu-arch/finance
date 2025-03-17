@@ -18,8 +18,8 @@ export default function InvoiceEditModalSelect({
 	formData,
 }: InvoiceEditModalSelectProps) {
 	return (
-		<div className="grid grid-cols-4 items-center gap-4">
-			<Label htmlFor="status" className="text-right">
+		<div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-2 sm:gap-4">
+			<Label htmlFor="status" className="sm:text-right">
 				Status
 			</Label>
 			<Select onValueChange={handleSelectChange} defaultValue={formData.status}>
