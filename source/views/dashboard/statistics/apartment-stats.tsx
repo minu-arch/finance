@@ -134,13 +134,13 @@ export function ApartmentStatsOverview() {
 
 			{/* Monthly comparison charts row */}
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-				{monthlyData.slice(-3).map((month) => (
+				{monthlyData.slice(-6).map((month) => (
 					<Card
 						key={month.month}
 						className="shadow-[0_0_10px_rgba(0,0,0,0.1)] border-none"
 					>
 						<CardHeader className="pb-2">
-							<CardTitle className="text-base">{month.month} 2023</CardTitle>
+							<CardTitle className="text-base">{month.month} 2025</CardTitle>
 						</CardHeader>
 						<CardContent>
 							<div className="space-y-2">
@@ -156,7 +156,7 @@ export function ApartmentStatsOverview() {
 									<span className="text-sm font-medium">Profit</span>
 									<span className="font-bold">{month.profit} €</span>
 								</div>
-								<div className="flex justify-between items-center pt-2">
+								<div className="flex justify-between items-center pt-2 mb-2">
 									<span className="text-sm text-gray-500">Marjă profit</span>
 									<span className="font-medium text-green-600">
 										{((month.profit / month.revenue) * 100).toFixed(1)}%

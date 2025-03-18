@@ -14,7 +14,6 @@ export default [
 	// Dashboard
 	route("dashboard", "../views/dashboard/layout.tsx", [
 		index("../views/dashboard/home/dashboard.tsx"),
-		// route("home", "../views/dashboard/home/dashboard.tsx"),
 		route("invoices", "../views/dashboard/invoices/invoices.tsx"),
 		route("statistics", "../views/dashboard/statistics/statistics.tsx"),
 		route("apartments", "../views/dashboard/apartments/apartments.tsx"),
@@ -22,5 +21,13 @@ export default [
 		route("expenses", "../views/dashboard/expenses/expenses.tsx"),
 		route("accounting", "../views/dashboard/accounting/accounting.tsx"),
 		route("todolist", "../views/dashboard/todolist/to-do-list.tsx"),
+
+		//Motostyle
+		// route("motostyle", "../views/motostyle/layout.tsx", [
+		// 	index("../views/motostyle/home/moto-home.tsx"),
+		// 	route("inventory", "../views/motostyle/inventory/inventory.tsx"),
+		// 	route("motorcycles", "../views/motostyle/motorcycles/motorcycles.tsx"),
+		// 	route("service", "../views/motostyle/service/service.tsx"),
+		// ]),
 	]),
 ] satisfies RouteConfig

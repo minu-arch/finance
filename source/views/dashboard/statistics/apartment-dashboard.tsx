@@ -42,6 +42,22 @@ const apartmentData = {
 		{ month: "September", revenue: 190, expenses: 50, profit: 140 },
 		{ month: "October", revenue: 220, expenses: 65, profit: 155 },
 	],
+	"Apt 103": [
+		{ month: "May", revenue: 120, expenses: 40, profit: 80 },
+		{ month: "June", revenue: 240, expenses: 60, profit: 180 },
+		{ month: "July", revenue: 230, expenses: 55, profit: 175 },
+		{ month: "August", revenue: 160, expenses: 45, profit: 115 },
+		{ month: "September", revenue: 190, expenses: 50, profit: 140 },
+		{ month: "October", revenue: 220, expenses: 65, profit: 155 },
+	],
+	"Apt 104": [
+		{ month: "May", revenue: 120, expenses: 40, profit: 80 },
+		{ month: "June", revenue: 240, expenses: 60, profit: 180 },
+		{ month: "July", revenue: 230, expenses: 55, profit: 175 },
+		{ month: "August", revenue: 160, expenses: 45, profit: 115 },
+		{ month: "September", revenue: 190, expenses: 50, profit: 140 },
+		{ month: "October", revenue: 220, expenses: 65, profit: 155 },
+	],
 	// ... date for other apartments
 }
 
@@ -57,7 +73,16 @@ const categorySummary = {
 		{ name: "Utilități", value: 180 },
 		{ name: "Întreținere", value: 120 },
 	],
-	// ... date for other apartments
+	"Apt 103": [
+		{ name: "Chirie", value: 1500 },
+		{ name: "Utilități", value: 190 },
+		{ name: "Întreținere", value: 180 },
+	],
+	"Apt 104": [
+		{ name: "Chirie", value: 1500 },
+		{ name: "Utilități", value: 280 },
+		{ name: "Întreținere", value: 320 },
+	],
 }
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"]
@@ -94,7 +119,7 @@ export function ApartmentDashboard() {
 
 			{/* Summary Cards */}
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-				<Card className="bg-blue-50">
+				<Card className="bg-red-200">
 					<CardHeader className="pb-2">
 						<CardTitle className="text-sm">Total Venituri</CardTitle>
 					</CardHeader>
@@ -103,7 +128,7 @@ export function ApartmentDashboard() {
 					</CardContent>
 				</Card>
 
-				<Card className="bg-red-50">
+				<Card className="bg-green-100">
 					<CardHeader className="pb-2">
 						<CardTitle className="text-sm">Total Cheltuieli</CardTitle>
 					</CardHeader>
@@ -112,7 +137,7 @@ export function ApartmentDashboard() {
 					</CardContent>
 				</Card>
 
-				<Card className="bg-green-50">
+				<Card className="bg-violet-100">
 					<CardHeader className="pb-2">
 						<CardTitle className="text-sm">Profit</CardTitle>
 					</CardHeader>
