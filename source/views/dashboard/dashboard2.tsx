@@ -22,7 +22,6 @@ import { Button } from "@ui/button"
 import { Progress } from "@ui/progress"
 import { Badge } from "@ui/badge"
 import { Separator } from "@ui/separator"
-import { useNavigate } from "react-router"
 // Eliminăm importul useNavigate
 
 // Simulăm task-urile pentru ziua curentă
@@ -34,7 +33,6 @@ interface Task {
 }
 
 export default function Dashboard() {
-	const navigate = useNavigate()
 	const [greeting, setGreeting] = useState("Hello")
 	const [subGreeting, setSubGreeting] = useState("")
 	const [icon, setIcon] = useState<React.ReactNode>(null)
@@ -176,7 +174,9 @@ export default function Dashboard() {
 
 	// Înlocuim funcția de navigare cu o funcție simplă care folosește window.location
 	const handleViewAllTasks = () => {
-		navigate("/dashboard/todolist")
+		window.location.href = "/dashboard/todolist"
+		// Alternativ, poți folosi:
+		// document.querySelector('a[href="/dashboard/todolist"]')?.click()
 	}
 
 	return (
@@ -279,6 +279,10 @@ export default function Dashboard() {
 					</Button>
 				</CardFooter>
 			</Card>
+
+			<CardContent className="max-w-3xl mx-auto w-full">
+				<CardTitle>Dashboard Overview</CardTitle>
+			</CardContent>
 		</div>
 	)
 }

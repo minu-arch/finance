@@ -12,10 +12,11 @@ import {
 import { useId, useMemo, useRef, useState, useEffect } from "react"
 import { columns } from "./columns"
 import { mockData, type Apartment } from "./data"
-import { Card, CardTitle, CardHeader, CardContent, CardDescription } from "@ui/card"
+import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@ui/card"
 import ApartmentDescription from "./components/description/apartment-description"
 import ApartmentsFilters from "./components/filters/apartments-filters"
 import ApartmentsTable from "./components/tabel/apartments-table"
+import { TypographyH4 } from "@/views/dashboard/components/typography"
 
 export default function Apartments() {
 	const id = useId()

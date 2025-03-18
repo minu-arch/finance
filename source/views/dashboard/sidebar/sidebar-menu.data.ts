@@ -2,6 +2,7 @@ import {
 	SquareTerminal,
 	Users2,
 	Users,
+	Building2,
 	DollarSign,
 	ListTodo,
 	HandCoins,
@@ -25,6 +26,11 @@ export const menu = {
 	alertCount: 2,
 	items: [
 		{
+			title: "Acasǎ",
+			url: "/dashboard",
+			icon: House,
+		},
+		{
 			title: "Statistici",
 			url: "/dashboard/statistics",
 			icon: ChartNetwork,
@@ -32,7 +38,7 @@ export const menu = {
 		{
 			title: "Apartamente",
 			url: "/dashboard/apartments",
-			icon: House,
+			icon: Building2,
 		},
 		{
 			title: "Facturi",
@@ -46,13 +52,13 @@ export const menu = {
 			icon: HandCoins,
 			url: "/dashboard/expenses",
 		},
-		{
-			title: "Contabilitate",
-			icon: DollarSign,
-			url: "/dashboard/accounting",
-			hasAlert: true,
-			alertCount: 1,
-		},
+		// {
+		// 	title: "Contabilitate",
+		// 	icon: DollarSign,
+		// 	url: "/dashboard/accounting",
+		// 	hasAlert: true,
+		// 	alertCount: 1,
+		// },
 		{
 			title: "Lista de sarcini",
 			icon: ListTodo,
