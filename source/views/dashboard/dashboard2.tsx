@@ -38,9 +38,9 @@ export default function Dashboard() {
 	const [icon, setIcon] = useState<React.ReactNode>(null)
 	const [todaysTasks, setTodaysTasks] = useState<Task[]>([])
 
-	// Simulăm încărcarea task-urilor
+	// simulate the loading of the tasks
 	useEffect(() => {
-		// În practică, acestea ar veni de la un API
+		// in practice, these would come from an API
 		const mockTasks: Task[] = [
 			{ id: 1, text: "Revizuire raport financiar", completed: false, priority: "high" },
 			{
@@ -67,7 +67,7 @@ export default function Dashboard() {
 		setTodaysTasks(mockTasks)
 	}, [])
 
-	// Calculăm progresul task-urilor
+	// calculate the progress of the tasks
 	const completedTasks = todaysTasks.filter((task) => task.completed).length
 	const totalTasks = todaysTasks.length
 	const progressPercentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0
@@ -78,7 +78,7 @@ export default function Dashboard() {
 		const currentDay = new Date().getDay()
 		const isWeekend = currentDay === 0 || currentDay === 6
 
-		// Setează salutul și mesajul suplimentar în funcție de ora zilei
+		// set the greeting and the sub greeting in function of the hour of the day
 		if (currentHour >= 5 && currentHour < 12) {
 			setGreeting("Good Morning")
 
@@ -172,10 +172,9 @@ export default function Dashboard() {
 		)
 	}
 
-	// Înlocuim funcția de navigare cu o funcție simplă care folosește window.location
 	const handleViewAllTasks = () => {
 		window.location.href = "/dashboard/todolist"
-		// Alternativ, poți folosi:
+		// also i can use this:
 		// document.querySelector('a[href="/dashboard/todolist"]')?.click()
 	}
 
