@@ -10,7 +10,7 @@ import {
 } from "recharts"
 import { Card, CardContent, CardHeader, CardTitle } from "@ui/card"
 
-// Date de exemplu
+// example data
 const apartmentsData = [
 	{ month: "May", "Apt 101": 186, "Apt 102": 120, "Apt 103": 150, "Apt 104": 90 },
 	{ month: "June", "Apt 101": 305, "Apt 102": 240, "Apt 103": 230, "Apt 104": 180 },

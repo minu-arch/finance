@@ -8,7 +8,7 @@ import {
 	TableRow,
 } from "@ui/table"
 
-// Date de exemplu
+// example data
 const apartmentsData = [
 	{
 		apartment: "Apt 101",
@@ -52,9 +52,9 @@ const apartmentsData = [
 	},
 ]
 
-// Funcție pentru a genera culoarea bazată pe valoare
+// function to generate the color based on the value
 function getHeatmapColor(value: number, min: number, max: number) {
-	// Generează o culoare între roșu deschis și verde deschis
+	// generate a color between light red and light green
 	const ratio = (value - min) / (max - min)
 	const r = Math.floor(255 - ratio * 200)
 	const g = Math.floor(100 + ratio * 155)
@@ -63,7 +63,7 @@ function getHeatmapColor(value: number, min: number, max: number) {
 }
 
 export function ApartmentsRevenueTable() {
-	// Găsește valorile minime și maxime pentru color scaling
+	// find the minimum and maximum values for color scaling
 	const allValues = apartmentsData.flatMap((apt) => [
 		apt.may,
 		apt.june,

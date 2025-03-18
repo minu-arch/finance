@@ -42,10 +42,10 @@ const apartmentData = {
 		{ month: "September", revenue: 190, expenses: 50, profit: 140 },
 		{ month: "October", revenue: 220, expenses: 65, profit: 155 },
 	],
-	// ... date pentru alte apartamente
+	// ... date for other apartments
 }
 
-// Date pentru rezumat pe categorii
+// Date for category summary
 const categorySummary = {
 	"Apt 101": [
 		{ name: "Chirie", value: 1200 },
@@ -57,7 +57,7 @@ const categorySummary = {
 		{ name: "Utilități", value: 180 },
 		{ name: "Întreținere", value: 120 },
 	],
-	// ... date pentru alte apartamente
+	// ... date for other apartments
 }
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"]
@@ -65,7 +65,7 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28"]
 export function ApartmentDashboard() {
 	const [selectedApartment, setSelectedApartment] = useState("Apt 101")
 
-	// Calculează sumarul financiar
+	// calculate the financial summary
 	const totalRevenue = apartmentData[
 		selectedApartment as keyof typeof apartmentData
 	].reduce((sum: number, month: { revenue: number }) => sum + month.revenue, 0)
