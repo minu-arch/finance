@@ -20,14 +20,12 @@ export default function TaskList({ tasks, day, onToggleTask }: TaskListProps) {
 			) : (
 				<div className="space-y-2">
 					{filteredTasks.map((task) => (
-						<div
+						<button
 							key={task.id}
-							className="flex items-start gap-2 p-2 rounded-md hover:bg-accent/50 transition-colors cursor-pointer"
+							className="flex items-start gap-2 p-2 rounded-md hover:bg-accent/50 transition-colors cursor-pointer w-full text-left"
 							onClick={() => onToggleTask(task.id.toString())}
-							tabIndex={0}
-							role="button"
 							aria-label={`Sarcină: ${task.text}`}
-							onKeyDown={(e) => e.key === "Enter" && onToggleTask(task.id.toString())}
+							type="button"
 						>
 							<div className="mt-0.5">
 								{task.completed ? (
@@ -46,18 +44,18 @@ export default function TaskList({ tasks, day, onToggleTask }: TaskListProps) {
 							<Badge
 								variant="outline"
 								className={`
-									${
+                  ${
 										task.priority === "high"
 											? "border-red-500 text-red-500"
 											: task.priority === "medium"
 												? "border-orange-500 text-orange-500"
 												: "border-blue-500 text-blue-500"
 									}
-								`}
+                `}
 							>
 								{task.priority}
 							</Badge>
-						</div>
+						</button>
 					))}
 				</div>
 			)}
