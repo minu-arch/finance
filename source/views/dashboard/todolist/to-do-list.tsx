@@ -6,11 +6,11 @@ import ToDoListMain from "./components/to-do-list-main"
 import type { Task } from "./to-do-list.types"
 
 export default function WeeklyTodoList() {
-	const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS)
+	const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS as Task[])
 	const [newTask, setNewTask] = useState("")
 	const [selectedDay, setSelectedDay] = useState("Monday")
 	const [currentDate, setCurrentDate] = useState(new Date())
-
+	const [priority, setPriority] = useState<"high" | "medium" | "low">("medium")
 	const handleAddTask = () => {
 		if (newTask.trim() !== "") {
 			setTasks([
@@ -20,6 +20,7 @@ export default function WeeklyTodoList() {
 					day: selectedDay,
 					text: newTask,
 					completed: false,
+					priority,
 				},
 			])
 			setNewTask("")
@@ -48,6 +49,8 @@ export default function WeeklyTodoList() {
 					onToggleTask={handleToggleTask}
 					currentDate={currentDate}
 					daysOfWeek={DAYS_OF_WEEK}
+					priority={priority}
+					setPriority={setPriority}
 				/>
 			</Card>
 		</div>

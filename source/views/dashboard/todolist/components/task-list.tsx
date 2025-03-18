@@ -1,6 +1,5 @@
-import { Checkbox } from "@ui/checkbox"
-import { Label } from "@ui/label"
-import { ScrollArea } from "@ui/scroll-area"
+import { Badge } from "@ui/badge"
+import { CheckCircle2, Circle } from "lucide-react"
 import type { Task } from "../to-do-list.types"
 
 interface TaskListProps {
@@ -10,27 +9,58 @@ interface TaskListProps {
 }
 
 export default function TaskList({ tasks, day, onToggleTask }: TaskListProps) {
+	const filteredTasks = tasks.filter((task) => task.day === day)
+
 	return (
-		<ScrollArea className="flex-1 p-4">
-			<div className="space-y-2">
-				{tasks
-					.filter((task) => task.day === day)
-					.map((task) => (
-						<div key={task.id} className="flex items-center space-x-2">
-							<Checkbox
-								id={`task-${task.id}`}
-								checked={task.completed}
-								onCheckedChange={() => onToggleTask(task.id.toString())}
-							/>
-							<Label
-								htmlFor={`task-${task.id}`}
-								className={task.completed ? "line-through text-gray-500" : ""}
+		<div className="flex-1 p-4 overflow-auto">
+			{filteredTasks.length === 0 ? (
+				<div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+					Nicio sarcină pentru această zi
+				</div>
+			) : (
+				<div className="space-y-2">
+					{filteredTasks.map((task) => (
+						<div
+							key={task.id}
+							className="flex items-start gap-2 p-2 rounded-md hover:bg-accent/50 transition-colors cursor-pointer"
+							onClick={() => onToggleTask(task.id.toString())}
+							tabIndex={0}
+							role="button"
+							aria-label={`Sarcină: ${task.text}`}
+							onKeyDown={(e) => e.key === "Enter" && onToggleTask(task.id.toString())}
+						>
+							<div className="mt-0.5">
+								{task.completed ? (
+									<CheckCircle2 className="size-4 text-primary" />
+								) : (
+									<Circle className="size-4 text-muted-foreground" />
+								)}
+							</div>
+							<div className="flex-1">
+								<p
+									className={`${task.completed ? "line-through text-muted-foreground" : "text-foreground"}`}
+								>
+									{task.text}
+								</p>
+							</div>
+							<Badge
+								variant="outline"
+								className={`
+									${
+										task.priority === "high"
+											? "border-red-500 text-red-500"
+											: task.priority === "medium"
+												? "border-orange-500 text-orange-500"
+												: "border-blue-500 text-blue-500"
+									}
+								`}
 							>
-								{task.text}
-							</Label>
+								{task.priority}
+							</Badge>
 						</div>
 					))}
-			</div>
-		</ScrollArea>
+				</div>
+			)}
+		</div>
 	)
 }

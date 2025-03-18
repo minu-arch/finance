@@ -3,4 +3,5 @@ export interface Task {
 	day: string
 	text: string
 	completed: boolean
+	priority: "high" | "medium" | "low"
 }

@@ -6,6 +6,7 @@ import ToDoListButton from "./to-do-list-button"
 import TaskList from "./task-list"
 import { GridLayout } from "@/views/dashboard/components/grid-layout"
 import PanelGroupHeader from "./panel-grup-header"
+import ToDoListPrioritySelect from "./to-do-list-priority-select"
 
 interface ToDoListMainProps {
 	tasks: Task[]
@@ -13,6 +14,8 @@ interface ToDoListMainProps {
 	setNewTask: (value: string) => void
 	selectedDay: string
 	setSelectedDay: (value: string) => void
+	priority: "high" | "medium" | "low"
+	setPriority: (value: "high" | "medium" | "low") => void
 	onAddTask: () => void
 	onToggleTask: (taskId: number) => void
 	currentDate: Date
@@ -25,6 +28,8 @@ export default function ToDoListMain({
 	setNewTask,
 	selectedDay,
 	setSelectedDay,
+	priority,
+	setPriority,
 	onAddTask,
 	onToggleTask,
 	currentDate,
@@ -51,6 +56,7 @@ export default function ToDoListMain({
 						setNewTask={setNewTask}
 						onAddTask={onAddTask}
 					/>
+					<ToDoListPrioritySelect priority={priority} setPriority={setPriority} />
 					<ToDoListSelect selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
 					<ToDoListButton onAddTask={onAddTask} />
 				</div>

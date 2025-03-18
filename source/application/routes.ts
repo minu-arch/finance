@@ -13,7 +13,8 @@ export default [
 
 	// Dashboard
 	route("dashboard", "../views/dashboard/layout.tsx", [
-		index("../views/dashboard/dashboard.tsx"),
+		index("../views/dashboard/home/dashboard.tsx"),
+		// route("home", "../views/dashboard/home/dashboard.tsx"),
 		route("invoices", "../views/dashboard/invoices/invoices.tsx"),
 		route("statistics", "../views/dashboard/statistics/statistics.tsx"),
 		route("apartments", "../views/dashboard/apartments/apartments.tsx"),
