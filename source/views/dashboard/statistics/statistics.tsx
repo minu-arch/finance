@@ -12,7 +12,7 @@ export default function Statistics() {
 		<div className="space-y-6 p-4 size-full mx-auto">
 			<CardTitle className="text-2xl font-bold">Statistici</CardTitle>
 
-			<Tabs defaultValue="overview ">
+			<Tabs defaultValue="overview">
 				<div className="md:hidden bg-muted rounded-lg">
 					<TabsList className="w-full grid grid-cols-2 gap-2 p-1">
 						<TabsTrigger value="overview" className="truncate text-xs sm:text-sm">
