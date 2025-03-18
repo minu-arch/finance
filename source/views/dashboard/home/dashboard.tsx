@@ -1,31 +1,14 @@
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-	CardDescription,
-	CardFooter,
-} from "@ui/card"
+import { Card } from "@ui/card"
 import { useEffect, useState } from "react"
-import {
-	Sun,
-	Cloud,
-	Moon,
-	CloudMoon,
-	CheckCircle2,
-	Circle,
-	CalendarDays,
-} from "lucide-react"
-import { format } from "date-fns"
-import { ro } from "date-fns/locale"
-import { Button } from "@ui/button"
-import { Progress } from "@ui/progress"
-import { Badge } from "@ui/badge"
-import { Separator } from "@ui/separator"
+import { Sun, Cloud, Moon, CloudMoon } from "lucide-react"
 import { useNavigate } from "react-router"
+import DashboardHeader from "./components/dashboard-header"
+import DashboardContent from "./components/dashboard-content"
+import DashboardFooter from "./components/dashboard-footer"
+import type { Task } from "@/views/dashboard/todolist/to-do-list.types"
 
 // simulate the tasks for the current day
-interface Task {
+interface DashboardTask {
 	id: number
 	text: string
 	completed: boolean
@@ -37,12 +20,12 @@ export default function Dashboard() {
 	const [greeting, setGreeting] = useState("Hello")
 	const [subGreeting, setSubGreeting] = useState("")
 	const [icon, setIcon] = useState<React.ReactNode>(null)
-	const [todaysTasks, setTodaysTasks] = useState<Task[]>([])
+	const [todaysTasks, setTodaysTasks] = useState<DashboardTask[]>([])
 
 	// simulate the loading of the tasks
 	useEffect(() => {
 		// in practice, these would come from an API
-		const mockTasks: Task[] = [
+		const mockTasks: DashboardTask[] = [
 			{ id: 1, text: "Revizuire raport financiar", completed: false, priority: "high" },
 			{
 				id: 2,
@@ -181,102 +164,17 @@ export default function Dashboard() {
 	return (
 		<div className="space-y-4 p-4 size-full mx-auto flex flex-col gap-4">
 			<Card className="w-full max-w-3xl mx-auto">
-				<CardHeader className="text-center pb-2">
-					<div className="flex items-center justify-center gap-2 mb-2">
-						{icon}
-						<CardTitle className="text-2xl font-bold">{greeting}, Anca</CardTitle>
-					</div>
-					<CardDescription className="text-base">{subGreeting}</CardDescription>
-				</CardHeader>
+				<DashboardHeader icon={icon} greeting={greeting} subGreeting={subGreeting} />
 
-				<CardContent className="pb-2">
-					<div className="flex items-center justify-between mb-2">
-						<div className="flex items-center gap-2">
-							<CalendarDays className="size-5 text-muted-foreground" />
-							<h3 className="font-medium">
-								{format(new Date(), "EEEE, d MMMM", { locale: ro })}
-							</h3>
-						</div>
-						<Badge variant="outline" className="font-normal">
-							{totalTasks} task{totalTasks !== 1 ? "s" : ""}
-						</Badge>
-					</div>
+				<DashboardContent
+					totalTasks={totalTasks}
+					completedTasks={completedTasks}
+					progressPercentage={progressPercentage}
+					todaysTasks={todaysTasks as Task[]}
+					handleToggleTask={handleToggleTask}
+				/>
 
-					<div className="mb-4">
-						<div className="flex justify-between text-sm mb-1">
-							<span>Progress</span>
-							<span>
-								{completedTasks}/{totalTasks} completed
-							</span>
-						</div>
-						<Progress value={progressPercentage} className="h-2" />
-					</div>
-
-					<Separator className="my-4" />
-
-					<div className="space-y-3">
-						<h3 className="font-medium text-sm text-muted-foreground mb-2">
-							TODAY'S TASKS
-						</h3>
-
-						{todaysTasks.length === 0 ? (
-							<p className="text-center text-muted-foreground py-4">
-								No tasks for today. Enjoy your day!
-							</p>
-						) : (
-							<div className="space-y-2">
-								{todaysTasks.slice(0, 4).map((task) => (
-									<div
-										key={task.id}
-										className="flex items-start gap-2 p-2 rounded-md hover:bg-accent/50 transition-colors cursor-pointer"
-										onClick={() => handleToggleTask(task.id)}
-									>
-										<div className="mt-0.5">
-											{task.completed ? (
-												<CheckCircle2 className="size-5 text-primary" />
-											) : (
-												<Circle className="size-5 text-muted-foreground" />
-											)}
-										</div>
-										<div className="flex-1">
-											<p
-												className={`${task.completed ? "line-through text-muted-foreground" : "text-foreground"}`}
-											>
-												{task.text}
-											</p>
-										</div>
-										<Badge
-											variant="outline"
-											className={`
-                        ${
-													task.priority === "high"
-														? "border-red-500 text-red-500"
-														: task.priority === "medium"
-															? "border-orange-500 text-orange-500"
-															: "border-blue-500 text-blue-500"
-												}
-                      `}
-										>
-											{task.priority}
-										</Badge>
-									</div>
-								))}
-
-								{todaysTasks.length > 4 && (
-									<p className="text-center text-sm text-muted-foreground">
-										+{todaysTasks.length - 4} more tasks
-									</p>
-								)}
-							</div>
-						)}
-					</div>
-				</CardContent>
-
-				<CardFooter className="pt-0">
-					<Button variant="outline" className="w-full" onClick={handleViewAllTasks}>
-						View All Tasks
-					</Button>
-				</CardFooter>
+				<DashboardFooter handleViewAllTasks={handleViewAllTasks} />
 			</Card>
 		</div>
 	)
