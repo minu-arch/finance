@@ -1,3 +1,4 @@
+import { GridLayout } from "@/views/apartment/components/grid-layout"
 import { Card, CardHeader, CardTitle, CardContent } from "@ui/card"
 import { Bike, BarChart3, Wrench, Package } from "lucide-react"
 
@@ -26,7 +27,7 @@ function StatCard({ title, value, description, icon }: StatCardProps) {
 export default function MotoHome() {
 	return (
 		<div className="space-y-4 p-4 size-full mx-auto flex flex-col gap-4">
-			<div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+			<GridLayout columns={4}>
 				<StatCard
 					title="Total Motociclete"
 					value="128"
@@ -51,7 +52,7 @@ export default function MotoHome() {
 					description="128 produse sub stoc minim"
 					icon={<Package className="size-4 text-muted-foreground" />}
 				/>
-			</div>
+			</GridLayout>
 
 			<Card>
 				<CardHeader>
