@@ -6,7 +6,7 @@ const LoginButtons = () => {
 	const navigate = useNavigate()
 	const handleContinue = () => {
 		console.log("Continue")
-		navigate("/dashboard/")
+		navigate("/apartment/")
 	}
 	return (
 		<div className="flex flex-col gap-2">

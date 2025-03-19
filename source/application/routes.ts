@@ -11,23 +11,23 @@ export default [
 		// route("register", "../views/auth/register.tsx"),
 	]),
 
-	// Dashboard
-	route("dashboard", "../views/dashboard/layout.tsx", [
-		index("../views/dashboard/home/dashboard.tsx"),
-		route("invoices", "../views/dashboard/invoices/invoices.tsx"),
-		route("statistics", "../views/dashboard/statistics/statistics.tsx"),
-		route("apartments", "../views/dashboard/apartments/apartments.tsx"),
-		route("owners", "../views/dashboard/owners/owners.tsx"),
-		route("expenses", "../views/dashboard/expenses/expenses.tsx"),
-		route("accounting", "../views/dashboard/accounting/accounting.tsx"),
-		route("todolist", "../views/dashboard/todolist/to-do-list.tsx"),
+	// Apartments
+	route("apartment", "../views/apartment/layout.tsx", [
+		index("../views/apartment/home/dashboard.tsx"),
+		route("invoices", "../views/apartment/invoices/invoices.tsx"),
+		route("statistics", "../views/apartment/statistics/statistics.tsx"),
+		route("apartments", "../views/apartment/apartments/apartments.tsx"),
+		route("owners", "../views/apartment/owners/owners.tsx"),
+		route("expenses", "../views/apartment/expenses/expenses.tsx"),
+		route("accounting", "../views/apartment/accounting/accounting.tsx"),
+		route("todolist", "../views/apartment/todolist/to-do-list.tsx"),
 
 		//Motostyle
-		// route("motostyle", "../views/motostyle/layout.tsx", [
-		// 	index("../views/motostyle/home/moto-home.tsx"),
-		// 	route("inventory", "../views/motostyle/inventory/inventory.tsx"),
-		// 	route("motorcycles", "../views/motostyle/motorcycles/motorcycles.tsx"),
-		// 	route("service", "../views/motostyle/service/service.tsx"),
-		// ]),
+		route("motostyle", "../views/motostyle/layout.tsx", [
+			index("../views/motostyle/home/moto-home.tsx"),
+			route("inventory", "../views/motostyle/inventory/inventory.tsx"),
+			route("motorcycles", "../views/motostyle/motorcycles/motorcycles.tsx"),
+			route("service", "../views/motostyle/service/service.tsx"),
+		]),
 	]),
 ] satisfies RouteConfig
