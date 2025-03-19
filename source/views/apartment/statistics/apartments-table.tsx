@@ -74,11 +74,12 @@ export function ApartmentsRevenueTable() {
 	])
 	const minValue = Math.min(...allValues)
 	const maxValue = Math.max(...allValues)
+	const currentYear = new Date().getFullYear()
 
 	return (
 		<Card className="w-full shadow-[0_0_10px_rgba(0,0,0,0.1)] border-none">
 			<CardHeader>
-				<CardTitle>Venituri lunare pe apartamente (2023)</CardTitle>
+				<CardTitle>Venituri lunare pe apartamente ({currentYear})</CardTitle>
 			</CardHeader>
 			<CardContent>
 				<Table>
