@@ -1,14 +1,22 @@
 import { Outlet } from "react-router"
-import { useEffect } from "react"
-import { useAppContext, APP_OPTIONS } from "../apartment/sidebar/sidebar-header"
+import Sidebar from "@/views/apartment/sidebar/sidebar"
+import { AppContextProvider } from "@/views/apartment/sidebar/sidebar-header"
+import { SidebarProvider, SidebarInset } from "@ui/sidebar"
+import SidebarControls from "@/views/apartment/sidebar/sidebar-controls"
+import { ThemeProvider } from "@ui/theme-provider"
 
 export default function MotostyleLayout() {
-	const { setSelectedOption } = useAppContext()
-
-	// set the selected option to Motostyle
-	useEffect(() => {
-		setSelectedOption(APP_OPTIONS.MOTOSTYLE)
-	}, [setSelectedOption])
-
-	return <Outlet />
+	return (
+		<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+			<AppContextProvider>
+				<SidebarProvider>
+					<Sidebar />
+					<SidebarInset className="overflow-auto">
+						<SidebarControls />
+						<Outlet />
+					</SidebarInset>
+				</SidebarProvider>
+			</AppContextProvider>
+		</ThemeProvider>
+	)
 }

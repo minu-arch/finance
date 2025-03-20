@@ -18,22 +18,22 @@ export const menuMotostyle = {
 	items: [
 		{
 			title: "Acasǎ",
-			url: "/apartment/motostyle",
+			url: "/motostyle",
 			icon: Home,
 		},
 		{
 			title: "Inventar",
 			icon: Package,
-			url: "/apartment/motostyle/inventory",
+			url: "/motostyle/inventory",
 		},
 		{
 			title: "Motociclete",
-			url: "/apartment/motostyle/motorcycles",
+			url: "/motostyle/motorcycles",
 			icon: Bike,
 		},
 		{
 			title: "Service",
-			url: "/apartment/motostyle/service",
+			url: "/motostyle/service",
 			icon: Wrench,
 		},
 	],

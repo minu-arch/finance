@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router"
 import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel } from "@ui/sidebar"
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@ui/sidebar"
 import { menu } from "./sidebar-menu.data"
-import { menuMotostyle } from "./sidebar-menu.motostyle"
+import { menuMotostyle } from "@/views/motostyle/sidebar-menu.motostyle"
 import { useAppContext, APP_OPTIONS } from "./sidebar-header"
 
 export default () => {

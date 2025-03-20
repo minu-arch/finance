@@ -8,7 +8,6 @@ export default [
 	route("auth", "../views/auth/layout.tsx", [
 		index("../views/auth/login/login.tsx"),
 		route("forgot-password", "../views/auth/forgot-password/forgot-password.tsx"),
-		// route("register", "../views/auth/register.tsx"),
 	]),
 
 	// Apartments
@@ -21,13 +20,13 @@ export default [
 		route("expenses", "../views/apartment/expenses/expenses.tsx"),
 		route("accounting", "../views/apartment/accounting/accounting.tsx"),
 		route("todolist", "../views/apartment/todolist/to-do-list.tsx"),
+	]),
 
-		//Motostyle
-		route("motostyle", "../views/motostyle/layout.tsx", [
-			index("../views/motostyle/home/moto-home.tsx"),
-			route("inventory", "../views/motostyle/inventory/inventory.tsx"),
-			route("motorcycles", "../views/motostyle/motorcycles/motorcycles.tsx"),
-			route("service", "../views/motostyle/service/service.tsx"),
-		]),
+	// Motostyle ca rută separată
+	route("motostyle", "../views/motostyle/layout.tsx", [
+		index("../views/motostyle/home/moto-home.tsx"),
+		route("inventory", "../views/motostyle/inventory/inventory.tsx"),
+		route("motorcycles", "../views/motostyle/motorcycles/motorcycles.tsx"),
+		route("service", "../views/motostyle/service/service.tsx"),
 	]),
 ] satisfies RouteConfig

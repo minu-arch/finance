@@ -63,15 +63,25 @@ export default function DropdownHeader() {
 	const options = [APP_OPTIONS.APARTMENTS, APP_OPTIONS.MOTOSTYLE]
 	const { selectedOption, setSelectedOption } = useAppContext()
 	const navigate = useNavigate()
+	const location = useLocation()
 
 	const handleOptionChange = (option: string) => {
 		setSelectedOption(option)
 		if (option === APP_OPTIONS.APARTMENTS) {
 			navigate("/apartment")
 		} else if (option === APP_OPTIONS.MOTOSTYLE) {
-			navigate("/apartment/motostyle")
+			navigate("/motostyle")
 		}
 	}
+
+	// Adăugăm un efect pentru a gestiona corect starea când utilizatorul navighează direct la URL
+	useEffect(() => {
+		if (location.pathname.startsWith("/motostyle")) {
+			setSelectedOption(APP_OPTIONS.MOTOSTYLE)
+		} else if (location.pathname.startsWith("/apartment")) {
+			setSelectedOption(APP_OPTIONS.APARTMENTS)
+		}
+	}, [location.pathname, setSelectedOption])
 
 	return (
 		<SidebarHeader>
