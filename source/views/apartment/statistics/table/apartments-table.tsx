@@ -1,13 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@ui/card"
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@ui/table"
-
+import { Table } from "@ui/table"
+import RevenueTableBody from "./components/revenue-table-body"
+import RevenueTableHeader from "./components/revenue-table-header"
 // example data
 const apartmentsData = [
 	{
@@ -83,68 +77,13 @@ export function ApartmentsRevenueTable() {
 			</CardHeader>
 			<CardContent>
 				<Table>
-					<TableHeader>
-						<TableRow>
-							<TableHead>Apartament</TableHead>
-							<TableHead>Mai</TableHead>
-							<TableHead>Iunie</TableHead>
-							<TableHead>Iulie</TableHead>
-							<TableHead>August</TableHead>
-							<TableHead>Septembrie</TableHead>
-							<TableHead>Octombrie</TableHead>
-							<TableHead>Total</TableHead>
-						</TableRow>
-					</TableHeader>
-					<TableBody>
-						{apartmentsData.map((row) => (
-							<TableRow key={row.apartment}>
-								<TableCell className="font-medium">{row.apartment}</TableCell>
-								<TableCell
-									style={{
-										backgroundColor: getHeatmapColor(row.may, minValue, maxValue),
-									}}
-								>
-									{row.may} €
-								</TableCell>
-								<TableCell
-									style={{
-										backgroundColor: getHeatmapColor(row.june, minValue, maxValue),
-									}}
-								>
-									{row.june} €
-								</TableCell>
-								<TableCell
-									style={{
-										backgroundColor: getHeatmapColor(row.july, minValue, maxValue),
-									}}
-								>
-									{row.july} €
-								</TableCell>
-								<TableCell
-									style={{
-										backgroundColor: getHeatmapColor(row.august, minValue, maxValue),
-									}}
-								>
-									{row.august} €
-								</TableCell>
-								<TableCell
-									style={{
-										backgroundColor: getHeatmapColor(row.september, minValue, maxValue),
-									}}
-								>
-									{row.september} €
-								</TableCell>
-								<TableCell
-									style={{
-										backgroundColor: getHeatmapColor(row.october, minValue, maxValue),
-									}}
-								>
-									{row.october} €
-								</TableCell>
-								<TableCell className="font-bold">{row.total} €</TableCell>
-							</TableRow>
-						))}
-					</TableBody>
+					<RevenueTableHeader />
+					<RevenueTableBody
+						apartmentsData={apartmentsData as unknown as Record<string, number>[]}
+						minValue={minValue}
+						maxValue={maxValue}
+						getHeatmapColor={getHeatmapColor}
+					/>
 				</Table>
 			</CardContent>
 		</Card>

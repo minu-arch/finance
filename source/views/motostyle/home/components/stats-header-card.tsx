@@ -1,19 +1,21 @@
-import { BarChart3, Bike, Package, Wrench } from "lucide-react"
 import { GridLayout } from "@/views/apartment/components/grid-layout"
 import { Card, CardHeader, CardTitle, CardContent } from "@ui/card"
+import { statCardsData, type StatCardData } from "./statCardsData.data"
+import type { LucideIcon } from "lucide-react"
 
 interface StatCardProps {
 	title: string
 	value: string
 	description: string
-	icon: React.ReactNode
+	icon: LucideIcon
 }
-function StatCard({ title, value, description, icon }: StatCardProps) {
+
+function StatCard({ title, value, description, icon: Icon }: StatCardProps) {
 	return (
 		<Card>
 			<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
 				<CardTitle className="text-sm font-medium">{title}</CardTitle>
-				{icon}
+				<Icon className="size-4 text-muted-foreground" />
 			</CardHeader>
 			<CardContent>
 				<div className="text-2xl font-bold">{value}</div>
@@ -26,30 +28,15 @@ function StatCard({ title, value, description, icon }: StatCardProps) {
 export default function StatsHeaderCard() {
 	return (
 		<GridLayout columns={4}>
-			<StatCard
-				title="Total Motociclete"
-				value="128"
-				description="12 adăugate luna aceasta"
-				icon={<Bike className="size-4 text-muted-foreground" />}
-			/>
-			<StatCard
-				title="Vânzări"
-				value="€9,254"
-				description="+15.1% față de luna trecută"
-				icon={<BarChart3 className="size-4 text-muted-foreground" />}
-			/>
-			<StatCard
-				title="Service Active"
-				value="24"
-				description="4 finalizate azi"
-				icon={<Wrench className="size-4 text-muted-foreground" />}
-			/>
-			<StatCard
-				title="Inventar"
-				value="782"
-				description="128 produse sub stoc minim"
-				icon={<Package className="size-4 text-muted-foreground" />}
-			/>
+			{statCardsData.map((card) => (
+				<StatCard
+					key={card.id}
+					title={card.title}
+					value={card.value}
+					description={card.description}
+					icon={card.icon}
+				/>
+			))}
 		</GridLayout>
 	)
 }
