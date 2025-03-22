@@ -4,7 +4,7 @@ import { GridLayout } from "@/views/apartment/components/grid-layout"
 export default function InvoiceDescription() {
 	return (
 		<GridLayout columns={4} stretch className="my-2 gap-2">
-			<Card>
+			<Card className="hover:bg-accent/50 hover:cursor-default">
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Facturi Platite</CardTitle>
 				</CardHeader>
@@ -12,7 +12,7 @@ export default function InvoiceDescription() {
 					<div className="text-2xl font-bold">50 Ron</div>
 				</CardContent>
 			</Card>
-			<Card>
+			<Card className="hover:bg-accent/50 hover:cursor-default">
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Facturi Neplătite</CardTitle>
 				</CardHeader>
@@ -20,7 +20,7 @@ export default function InvoiceDescription() {
 					<div className="text-2xl font-bold"> 100 Ron</div>
 				</CardContent>
 			</Card>
-			<Card>
+			<Card className="hover:bg-accent/50 hover:cursor-default">
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Facturi Parțial Plătite</CardTitle>
 				</CardHeader>
@@ -28,7 +28,7 @@ export default function InvoiceDescription() {
 					<div className="text-2xl font-bold"> 150 </div>
 				</CardContent>
 			</Card>
-			<Card>
+			<Card className="hover:bg-accent/50 hover:cursor-default">
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Total Facturi</CardTitle>
 				</CardHeader>
