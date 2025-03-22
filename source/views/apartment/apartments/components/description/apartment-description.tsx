@@ -4,7 +4,7 @@ import { GridLayout } from "@/views/apartment/components/grid-layout"
 export default function ApartmentDescription() {
 	return (
 		<GridLayout columns={4} className="my-2 gap-2">
-			<Card className="">
+			<Card className="hover:bg-accent/50">
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Total Apartamente</CardTitle>
 				</CardHeader>
@@ -12,7 +12,7 @@ export default function ApartmentDescription() {
 					<div className="text-2xl font-bold">1</div>
 				</CardContent>
 			</Card>
-			<Card>
+			<Card className="hover:bg-accent/50">
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Apartamente Ocupate</CardTitle>
 				</CardHeader>
@@ -20,7 +20,7 @@ export default function ApartmentDescription() {
 					<div className="text-2xl font-bold">0</div>
 				</CardContent>
 			</Card>
-			<Card>
+			<Card className="hover:bg-accent/50">
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Apartamente Libere</CardTitle>
 				</CardHeader>
@@ -28,7 +28,7 @@ export default function ApartmentDescription() {
 					<div className="text-2xl font-bold"> 1 </div>
 				</CardContent>
 			</Card>
-			<Card>
+			<Card className="hover:bg-accent/50">
 				<CardHeader>
 					<CardTitle className="text-sm font-medium">Venituri Totale</CardTitle>
 				</CardHeader>
