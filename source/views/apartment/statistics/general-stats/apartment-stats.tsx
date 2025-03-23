@@ -105,7 +105,7 @@ const ApartmentCards = memo(function ApartmentCards() {
 
 const RevenueChart = memo(function RevenueChart() {
 	return (
-		<Card className="shadow-[0_0_10px_rgba(0,0,0,0.1)]">
+		<Card className="shadow-[0_0_10px_rgba(0,0,0,0.1)] border-accent">
 			<CardHeader>
 				<CardTitle>Total venituri lunare</CardTitle>
 			</CardHeader>
@@ -137,7 +137,7 @@ const MonthlyCards = memo(function MonthlyCards() {
 			{monthlyData.slice(-6).map((month) => (
 				<Card
 					key={month.month}
-					className="shadow-[0_0_10px_rgba(0,0,0,0.1)] dark:border"
+					className="shadow-[0_0_10px_rgba(0,0,0,0.1)] border-accent"
 				>
 					<CardHeader className="pb-2">
 						<CardTitle className="text-base">{month.month} 2025</CardTitle>

@@ -37,7 +37,7 @@ const colors = {
 const currentYear = new Date().getFullYear()
 const ApartmentsTrendChart = memo(function ApartmentsTrendChart() {
 	return (
-		<Card className="w-full h-[500px] shadow-[0_0_10px_rgba(0,0,0,0.1)] border-none">
+		<Card className="w-full h-[500px] shadow-[0_0_10px_rgba(0,0,0,0.1)] border-accent">
 			<CardHeader>
 				<CardTitle>Tendințe venituri pe apartamente ({currentYear})</CardTitle>
 			</CardHeader>

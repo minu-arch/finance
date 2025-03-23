@@ -72,7 +72,7 @@ const ApartmentsRevenueTable = memo(function ApartmentsRevenueTable() {
 	const currentYear = new Date().getFullYear()
 
 	return (
-		<Card className="w-full shadow-[0_0_10px_rgba(0,0,0,0.1)] border-none">
+		<Card className="w-full shadow-[0_0_10px_rgba(0,0,0,0.1)] border-accent">
 			<CardHeader>
 				<CardTitle>Venituri lunare pe apartamente ({currentYear})</CardTitle>
 			</CardHeader>

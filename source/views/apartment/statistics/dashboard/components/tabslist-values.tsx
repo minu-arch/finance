@@ -2,7 +2,7 @@ import { TabsList, TabsTrigger } from "@ui/tabs"
 
 export default function TabsListValues() {
 	return (
-		<TabsList className="w-full">
+		<TabsList className="w-full border-accent">
 			<TabsTrigger value="revenue" className="flex-1">
 				Venituri & Cheltuieli
 			</TabsTrigger>

@@ -37,7 +37,7 @@ const colors = {
 const ApartmentsRevenueChart = memo(function ApartmentsRevenueChart() {
 	const currentYear = new Date().getFullYear()
 	return (
-		<Card className="w-full h-[500px] shadow-[0_0_10px_rgba(0,0,0,0.1)] border-none">
+		<Card className="w-full h-[500px] shadow-[0_0_10px_rgba(0,0,0,0.1)] border-accent">
 			<CardHeader>
 				<CardTitle>Venituri pe apartamente (Mai - Octombrie {currentYear})</CardTitle>
 			</CardHeader>

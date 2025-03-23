@@ -13,7 +13,7 @@ export default function TabsContentRevenue({
 	selectedApartment,
 }: TabsContentRevenueProps) {
 	return (
-		<Card>
+		<Card className="shadow-[0_0_10px_rgba(0,0,0,0.1)] border-accent">
 			<CardHeader>
 				<CardTitle>Venituri și Cheltuieli Lunare</CardTitle>
 			</CardHeader>

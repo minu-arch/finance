@@ -31,7 +31,7 @@ export default function TabsContentProfit({
 		: []
 
 	return (
-		<Card>
+		<Card className="shadow-[0_0_10px_rgba(0,0,0,0.1)] border-accent">
 			<CardHeader>
 				<CardTitle>Profit Lunar</CardTitle>
 			</CardHeader>
