@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@ui/card"
 import { Table } from "@ui/table"
 import RevenueTableBody from "./components/revenue-table-body"
 import RevenueTableHeader from "./components/revenue-table-header"
+import { memo } from "react"
 // example data
 const apartmentsData = [
 	{
@@ -56,7 +57,7 @@ function getHeatmapColor(value: number, min: number, max: number) {
 	return `rgba(${r}, ${g}, ${b}, 0.2)`
 }
 
-export function ApartmentsRevenueTable() {
+const ApartmentsRevenueTable = memo(function ApartmentsRevenueTable() {
 	// find the minimum and maximum values for color scaling
 	const allValues = apartmentsData.flatMap((apt) => [
 		apt.may,
@@ -88,4 +89,6 @@ export function ApartmentsRevenueTable() {
 			</CardContent>
 		</Card>
 	)
-}
+})
+
+export default ApartmentsRevenueTable

@@ -22,7 +22,7 @@ export default [
 		route("todolist", "../views/apartment/todolist/to-do-list.tsx"),
 	]),
 
-	// Motostyle ca rută separată
+	// Motostyle
 	route("motostyle", "../views/motostyle/layout.tsx", [
 		index("../views/motostyle/home/moto-home.tsx"),
 		route("inventory", "../views/motostyle/inventory/inventory.tsx"),

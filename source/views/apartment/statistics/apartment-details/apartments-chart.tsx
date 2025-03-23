@@ -9,6 +9,7 @@ import {
 	ResponsiveContainer,
 } from "recharts"
 import { Card, CardContent, CardHeader, CardTitle } from "@ui/card"
+import { memo } from "react"
 
 // example data for multiple apartments
 const apartmentsData = [
@@ -33,7 +34,7 @@ const colors = {
 	"Apt 104": "#ff8042",
 }
 
-export function ApartmentsRevenueChart() {
+const ApartmentsRevenueChart = memo(function ApartmentsRevenueChart() {
 	const currentYear = new Date().getFullYear()
 	return (
 		<Card className="w-full h-[500px] shadow-[0_0_10px_rgba(0,0,0,0.1)] border-none">
@@ -64,4 +65,6 @@ export function ApartmentsRevenueChart() {
 			</CardContent>
 		</Card>
 	)
-}
+})
+
+export default ApartmentsRevenueChart

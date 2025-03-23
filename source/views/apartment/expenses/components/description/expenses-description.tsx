@@ -16,7 +16,7 @@ export default function ExpenseDescription() {
 
 	return (
 		<GridLayout columns={4} className="my-2 gap-2">
-			<Card className="bg-red-200">
+			<Card className="bg-red-300 hover:bg-red-300/80 hover:cursor-default">
 				<CardHeader>
 					<div className="flex flex-col items-start gap-2">
 						<div className="rounded-full bg-red-400 p-2">
@@ -38,7 +38,7 @@ export default function ExpenseDescription() {
 				</CardContent>
 			</Card>
 
-			<Card className="bg-orange-100">
+			<Card className="bg-orange-200 hover:bg-orange-200/80 hover:cursor-default">
 				<CardHeader>
 					<div className="flex flex-col items-start gap-2">
 						<div className="rounded-full bg-orange-300 p-2">
@@ -60,7 +60,7 @@ export default function ExpenseDescription() {
 				</CardContent>
 			</Card>
 
-			<Card className="bg-green-100">
+			<Card className="bg-green-200 hover:bg-green-200/80 hover:cursor-default">
 				<CardHeader>
 					<div className="flex flex-col items-start gap-2">
 						<div className="rounded-full bg-green-300 p-2">
@@ -82,7 +82,7 @@ export default function ExpenseDescription() {
 				</CardContent>
 			</Card>
 
-			<Card className="bg-violet-100">
+			<Card className="bg-violet-200 hover:bg-violet-200/80 hover:cursor-default">
 				<CardHeader>
 					<div className="flex flex-col items-start gap-2">
 						<div className="rounded-full bg-violet-300 p-2">
