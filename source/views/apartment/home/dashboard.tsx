@@ -163,7 +163,7 @@ export default function Dashboard() {
 
 	return (
 		<div className="space-y-4 p-4 size-full mx-auto flex flex-col gap-4">
-			<Card className="w-full max-w-3xl mx-auto">
+			<Card className="w-full max-w-3xl mx-auto border-accent">
 				<DashboardHeader icon={icon} greeting={greeting} subGreeting={subGreeting} />
 
 				<DashboardContent
