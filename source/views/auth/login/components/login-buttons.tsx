@@ -17,10 +17,10 @@ const LoginButtons = () => {
 			>
 				Sign in
 			</Button>
-			<Button variant="outline" className="w-full hover:cursor-pointer">
+			{/* <Button variant="outline" className="w-full hover:cursor-pointer">
 				<FcGoogle className="mr-2 size-5" />
 				Sign up with Google
-			</Button>
+			</Button> */}
 		</div>
 	)
 }

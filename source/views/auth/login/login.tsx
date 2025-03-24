@@ -16,7 +16,7 @@ export default function Login() {
 							<div className="w-full rounded-md bg-background">
 								<LoginForm />
 							</div>
-							<LoginFooter />
+							{/* <LoginFooter /> */}
 						</div>
 					</div>
 
