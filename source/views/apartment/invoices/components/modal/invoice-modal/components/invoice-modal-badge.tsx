@@ -1,4 +1,4 @@
-import { Badge } from "@/theme/components/ui/badge"
+import { Badge } from "@ui/badge"
 
 interface InvoiceModalBadgeProps {
 	status: string

@@ -1,5 +1,5 @@
-import { Button } from "@/theme/components/ui/button"
-import { CardFooter } from "@/theme/components/ui/card"
+import { Button } from "@ui/button"
+import { CardFooter } from "@ui/card"
 
 type ForgotFooterProps = {
 	isSubmitted: boolean

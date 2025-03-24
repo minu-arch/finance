@@ -4,7 +4,7 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/theme/components/ui/select"
+} from "@ui/select"
 import type { Apartment } from "@/views/apartment/apartments/data"
 import type { Table } from "@tanstack/react-table"
 

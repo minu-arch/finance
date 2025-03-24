@@ -25,9 +25,11 @@ export default function ExpenseAction({ row }: CellContext<ApartmentSummary, unk
 		<>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
-					<Button variant="ghost" className="size-8 p-0">
-						<MoreHorizontal className="size-4" />
-					</Button>
+					<div className="flex w-full justify-end">
+						<Button variant="ghost" className="size-8 p-0">
+							<MoreHorizontal className="size-4" />
+						</Button>
+					</div>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end">
 					<DropdownMenuItem

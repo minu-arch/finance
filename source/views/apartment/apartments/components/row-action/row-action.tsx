@@ -9,7 +9,7 @@ import {
 } from "@ui/dropdown-menu"
 import type { Row } from "@tanstack/react-table"
 import type { Apartment } from "@/views/apartment/apartments/data"
-import { Button } from "@/theme/components/ui/button"
+import { Button } from "@ui/button"
 import { EllipsisIcon } from "lucide-react"
 import {
 	DropdownMenuSeparator,

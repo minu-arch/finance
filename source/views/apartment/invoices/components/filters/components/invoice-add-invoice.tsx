@@ -4,7 +4,7 @@ import { useState } from "react"
 import type { Table } from "@tanstack/react-table"
 import type { Invoice } from "@/views/apartment/invoices/invoice.data"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@ui/dialog"
-import AddInvoiceForm from "../../modal/add-invoice-modal/invoice-form-modal"
+import AddInvoiceForm from "@/views/apartment/invoices/components/modal/add-invoice-modal/invoice-form-modal"
 import { VisuallyHidden } from "@/views/apartment/components/visually-hidden"
 interface InvoiceAddInvoiceProps {
 	table: Table<Invoice>

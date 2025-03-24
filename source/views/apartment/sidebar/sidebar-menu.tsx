@@ -1,41 +1,64 @@
-import { Link, useLocation } from "react-router"
+import { Link, useLocation, useNavigate } from "react-router"
 import { SidebarGroup, SidebarGroupContent, SidebarGroupLabel } from "@ui/sidebar"
 import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "@ui/sidebar"
 import { menu } from "./sidebar-menu.data"
 import { menuMotostyle } from "@/views/motostyle/sidebar-menu.motostyle"
 import { useAppContext, APP_OPTIONS } from "./sidebar-header"
+import { useSidebarContext } from "./sidebar-context"
+import { useEffect } from "react"
 
-export default () => {
+export default function SidebarMenuComponent() {
+	const { activeMenuItem, setActiveMenuItem } = useSidebarContext()
 	const { selectedOption } = useAppContext()
-	const currentMenu = selectedOption === APP_OPTIONS.APARTMENTS ? menu : menuMotostyle
+	const navigate = useNavigate()
 	const location = useLocation()
 
-	// check if the current link is active
-	const isActiveLink = (url: string) => {
-		// for the home page (apartment), we check if we are on the exact page or on one of its subpages
-		// but not in the specific sections (these will have their own active elements)
-		if (url === "/apartment") {
-			// it is active only if we are on the exact page or if we are not on a known subpage
-			return (
-				location.pathname === "/apartment" ||
-				(location.pathname.startsWith("/apartment") &&
-					!currentMenu.items.some(
-						(item) =>
-							item.url !== "/apartment" && location.pathname.startsWith(item.url),
-					))
-			)
-		}
+	// when the location changes, update the active menu item
+	useEffect(() => {
+		// extract the current path without query parameters
+		const currentPath = location.pathname
 
-		// for the other menu items, we check if the current URL starts with the menu item's URL
-		return location.pathname.startsWith(url)
+		// find the menu item that matches the current path
+		// iterate through the menu items and check if the href of the item is part of the current path
+		const menuItems =
+			selectedOption === APP_OPTIONS.MOTOSTYLE ? menuMotostyle.items : menu.items
+
+		const matchedItem = menuItems.find(
+			(item) => currentPath.includes(item.url) && item.url !== "/",
+		)
+
+		if (matchedItem) {
+			setActiveMenuItem(matchedItem.url)
+		} else if (
+			(currentPath === "/apartment" && selectedOption === APP_OPTIONS.APARTMENTS) ||
+			(currentPath === "/motostyle" && selectedOption === APP_OPTIONS.MOTOSTYLE)
+		) {
+			// if we are on the home page, activate the "Home" item
+			const homeItem = menuItems.find((item) => item.title === "Acasă")
+			if (homeItem) {
+				setActiveMenuItem(homeItem.url)
+			}
+		}
+	}, [location.pathname, selectedOption, setActiveMenuItem])
+
+	// navigation function
+	const handleMenuItemClick = (url: string) => {
+		setActiveMenuItem(url)
+		navigate(url)
 	}
+
+	// choose the menu items based on the selected option
+	const menuItems =
+		selectedOption === APP_OPTIONS.MOTOSTYLE ? menuMotostyle.items : menu.items
 
 	return (
 		<SidebarGroup>
-			<SidebarGroupLabel>{currentMenu.title}</SidebarGroupLabel>
+			<SidebarGroupLabel>
+				{selectedOption === APP_OPTIONS.MOTOSTYLE ? menuMotostyle.title : menu.title}
+			</SidebarGroupLabel>
 			<SidebarGroupContent>
 				<SidebarMenu>
-					{currentMenu.items.map(
+					{menuItems.map(
 						(item: {
 							title: string
 							url: string
@@ -44,8 +67,8 @@ export default () => {
 							alertCount?: number
 						}) => (
 							<SidebarMenuItem key={item.title}>
-								<SidebarMenuButton asChild isActive={isActiveLink(item.url)}>
-									<Link to={item.url}>
+								<SidebarMenuButton asChild isActive={activeMenuItem === item.url}>
+									<Link to={item.url} onClick={() => handleMenuItemClick(item.url)}>
 										<item.icon />
 										<span>{item.title}</span>
 										{item.hasAlert && (

@@ -1,5 +1,5 @@
 import type { Invoice } from "@/views/apartment/invoices/invoice.data"
-import InvoiceModalBadge from "./invoice-modal-badge"
+import InvoiceModalBadge from "@/views/apartment/invoices/components/modal/invoice-modal/components/invoice-modal-badge"
 
 interface InvoiceModalContentProps {
 	invoice: Invoice

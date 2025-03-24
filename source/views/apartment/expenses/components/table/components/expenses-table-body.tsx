@@ -3,7 +3,7 @@ import { TableCell } from "@ui/table"
 import { TableRow } from "@ui/table"
 import { columns } from "@/views/apartment/expenses/columns"
 import { flexRender, type Table } from "@tanstack/react-table"
-import type { ApartmentSummary } from "../../../expenses.data"
+import type { ApartmentSummary } from "@/views/apartment/expenses/expenses.data"
 
 interface ExpensesTableBodyProps {
 	table: Table<ApartmentSummary>

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { memo, useState } from "react"
 import SummaryCards from "./components/summary-cards"
 import SelectApartments from "./components/select-apartments"
 import TabsContentRevenue from "./components/tabscontent-revenue"
@@ -68,7 +68,7 @@ const categorySummary = {
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"]
 
-export function ApartmentDashboard() {
+const ApartmentDashboard = memo(function ApartmentDashboard() {
 	const [selectedApartment, setSelectedApartment] = useState("Apt 101")
 
 	// calculate the financial summary
@@ -142,4 +142,6 @@ export function ApartmentDashboard() {
 			</Tabs>
 		</div>
 	)
-}
+})
+
+export default ApartmentDashboard

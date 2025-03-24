@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@ui/card"
 import { GridLayout } from "@/views/apartment/components/grid-layout"
-import { Wallet, Building2, Receipt, TrendingUp, HandCoins } from "lucide-react"
+import { Wallet, Building2, TrendingUp, HandCoins } from "lucide-react"
 import {
 	mockData,
 	calculateTotalExpenses,

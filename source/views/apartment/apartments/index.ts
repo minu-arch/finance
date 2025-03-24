@@ -3,21 +3,21 @@ import { cors } from "hono/cors"
 
 const app = new Hono()
 
-// Middleware pentru CORS
+// CORS middleware
 app.use("/*", cors())
 
 // GET /api/apartments
 app.get("/api/apartments", async (c) => {
-	// Aici vei adăuga logica pentru a prelua datele din baza de date
+	// here you will add the logic to retrieve the data from the database
 	return c.json([
-		/* datele tale */
+		/* your data */
 	])
 })
 
 // POST /api/apartments
 app.post("/api/apartments", async (c) => {
 	const body = await c.req.json()
-	// Aici vei adăuga logica pentru a salva în baza de date
+	// here you will add the logic to save the data to the database
 	return c.json(body)
 })
 
@@ -25,14 +25,14 @@ app.post("/api/apartments", async (c) => {
 app.put("/api/apartments/:id", async (c) => {
 	const id = c.param("id")
 	const body = await c.req.json()
-	// Aici vei adăuga logica pentru a actualiza în baza de date
+	// here you will add the logic to update the data in the database
 	return c.json({ id, ...body })
 })
 
 // DELETE /api/apartments/:id
 app.delete("/api/apartments/:id", async (c) => {
 	const id = c.param("id")
-	// Aici vei adăuga logica pentru a șterge din baza de date
+	// here you will add the logic to delete the data from the database
 	return c.json({ success: true })
 })
 
@@ -43,4 +43,3 @@ export default app
 //it is used to post the data to the database
 //it is used to put the data to the database
 //it is used to delete the data from the database
-

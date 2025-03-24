@@ -1,14 +1,14 @@
-import axios from 'axios'; // Primul pas: instalează axios cu: pnpm add axios
+import axios from "axios"
 import type { Apartment } from "./data"
-// Definește tipurile pentru răspunsurile API
+// Define the types for the API responses
 export interface ApiResponse<T> {
-		data: T
-		status: number
-		message?: string
-	}
-// Serviciu pentru apartamente
+	data: T
+	status: number
+	message?: string
+}
+// apartment service
 export const apartmentsApi = {
-	// Obține toate apartamentele
+	// get all apartments
 	getAll: async (): Promise<ApiResponse<Apartment[]>> => {
 		try {
 			const response = await axios.get("/api/apartments")
@@ -20,7 +20,7 @@ export const apartmentsApi = {
 			throw new Error("Failed to fetch apartments")
 		}
 	},
-	// Adaugă un apartament nou
+	// add a new apartment
 	create: async (apartment: Omit<Apartment, "id">): Promise<ApiResponse<Apartment>> => {
 		try {
 			const response = await axios.post("/api/apartments", apartment)
@@ -32,7 +32,7 @@ export const apartmentsApi = {
 			throw new Error("Failed to create apartment")
 		}
 	},
-	// Actualizează un apartament
+	// update an apartment
 	update: async (
 		id: string,
 		apartment: Partial<Apartment>,
@@ -47,7 +47,7 @@ export const apartmentsApi = {
 			throw new Error("Failed to update apartment")
 		}
 	},
-	// Șterge un apartament
+	// clear an apartment
 	delete: async (id: string): Promise<ApiResponse<void>> => {
 		try {
 			const response = await axios.delete(`/api/apartments/${id}`)

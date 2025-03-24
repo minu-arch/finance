@@ -16,7 +16,6 @@ import { Card, CardHeader, CardContent, CardDescription, CardTitle } from "@ui/c
 import ApartmentDescription from "./components/description/apartment-description"
 import ApartmentsFilters from "./components/filters/apartments-filters"
 import ApartmentsTable from "./components/tabel/apartments-table"
-import { TypographyH4 } from "@/views/apartment/components/typography"
 
 export default function Apartments() {
 	const id = useId()

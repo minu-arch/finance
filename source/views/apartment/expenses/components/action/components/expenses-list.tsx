@@ -1,4 +1,4 @@
-import { Badge } from "@/theme/components/ui/badge"
+import { Badge } from "@ui/badge"
 import { ro } from "date-fns/locale"
 import { format } from "date-fns"
 import type { Expense, ExpenseCategory } from "@/views/apartment/expenses/expenses.data"

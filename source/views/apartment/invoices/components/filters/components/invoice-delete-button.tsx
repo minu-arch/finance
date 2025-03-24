@@ -1,4 +1,4 @@
-import { Button } from "@/theme/components/ui/button"
+import { Button } from "@ui/button"
 import { TrashIcon } from "lucide-react"
 import type { Table } from "@tanstack/react-table"
 import type { Invoice } from "@/views/apartment/invoices/invoice.data"

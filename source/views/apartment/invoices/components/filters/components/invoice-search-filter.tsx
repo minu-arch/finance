@@ -1,7 +1,7 @@
 import { CircleXIcon } from "lucide-react"
 import { cn } from "@/theme/lib/utils"
 import { ListFilterIcon } from "lucide-react"
-import { Input } from "@/theme/components/ui/input"
+import { Input } from "@ui/input"
 import type { Table } from "@tanstack/react-table"
 import type { Invoice } from "@/views/apartment/invoices/invoice.data"
 

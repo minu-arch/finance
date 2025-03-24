@@ -1,4 +1,4 @@
-import { Separator } from "@/theme/components/ui/separator"
+import { Separator } from "@ui/separator"
 import type { Invoice } from "@/views/apartment/invoices/invoice.data"
 
 interface InvoiceModalFooterProps {

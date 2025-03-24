@@ -5,6 +5,7 @@ import { SidebarMenu, SidebarHeader } from "@ui/sidebar"
 import { Check, ChevronDown } from "lucide-react"
 import { createContext, useContext, useState, useEffect } from "react"
 import { useNavigate, useLocation } from "react-router"
+import { useSidebarContext } from "./sidebar-context"
 
 // create a context for the selected menu option
 type AppContextType = {
@@ -62,11 +63,14 @@ export function AppContextProvider({ children }: { children: React.ReactNode }) 
 export default function DropdownHeader() {
 	const options = [APP_OPTIONS.APARTMENTS, APP_OPTIONS.MOTOSTYLE]
 	const { selectedOption, setSelectedOption } = useAppContext()
+	const { setActiveMenuItem } = useSidebarContext()
 	const navigate = useNavigate()
 	const location = useLocation()
 
 	const handleOptionChange = (option: string) => {
 		setSelectedOption(option)
+		setActiveMenuItem(null)
+
 		if (option === APP_OPTIONS.APARTMENTS) {
 			navigate("/apartment")
 		} else if (option === APP_OPTIONS.MOTOSTYLE) {
@@ -74,7 +78,7 @@ export default function DropdownHeader() {
 		}
 	}
 
-	// Adăugăm un efect pentru a gestiona corect starea când utilizatorul navighează direct la URL
+	// add a listener to the location to update the selected option
 	useEffect(() => {
 		if (location.pathname.startsWith("/motostyle")) {
 			setSelectedOption(APP_OPTIONS.MOTOSTYLE)

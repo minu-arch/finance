@@ -1,4 +1,4 @@
-import { Button } from "@/theme/components/ui/button"
+import { Button } from "@ui/button"
 import { FcGoogle } from "react-icons/fc"
 import { useNavigate } from "react-router"
 
