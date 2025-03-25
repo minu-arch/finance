@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { Card } from "@ui/card"
-import ToDoListHeader from "./components/to-do-list-header"
+import ToDoListHeader from "./components/to-do-list-header/to-do-list-header"
 import { INITIAL_TASKS, DAYS_OF_WEEK } from "./to-do-list.sample"
-import ToDoListMain from "./components/to-do-list-main"
+import ToDoListMain from "./components/to-do-list-main/to-do-list-main"
 import type { Task } from "./to-do-list.types"
 
 export default function WeeklyTodoList() {
@@ -10,9 +10,16 @@ export default function WeeklyTodoList() {
 	const [newTask, setNewTask] = useState("")
 	const [selectedDay, setSelectedDay] = useState("Monday")
 	const [currentDate, setCurrentDate] = useState(new Date())
-	const [priority, setPriority] = useState<"high" | "medium" | "low">("medium")
+	const [priority, setPriority] = useState<"high" | "medium" | "low" | undefined>(
+		undefined,
+	)
+	const [isPriorityInvalid, setIsPriorityInvalid] = useState(false)
 	const handleAddTask = () => {
 		if (newTask.trim() !== "") {
+			if (!priority) {
+				setIsPriorityInvalid(true)
+				return
+			}
 			setTasks([
 				...tasks,
 				{
@@ -20,7 +27,7 @@ export default function WeeklyTodoList() {
 					day: selectedDay,
 					text: newTask,
 					completed: false,
-					priority,
+					priority: priority as "high" | "medium" | "low",
 				},
 			])
 			setNewTask("")
@@ -51,6 +58,8 @@ export default function WeeklyTodoList() {
 					daysOfWeek={DAYS_OF_WEEK}
 					priority={priority}
 					setPriority={setPriority}
+					isPriorityInvalid={isPriorityInvalid}
+					setIsPriorityInvalid={setIsPriorityInvalid}
 				/>
 			</Card>
 		</div>

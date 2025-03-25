@@ -1,4 +1,4 @@
-import { DAYS_OF_WEEK } from "../to-do-list.sample"
+import { DAYS_OF_WEEK } from "@/views/apartment/todolist/to-do-list.sample"
 import {
 	Select,
 	SelectItem,

@@ -1,12 +1,12 @@
 import { CardContent } from "@ui/card"
-import type { Task } from "../to-do-list.types"
-import ToDoListInput from "./to-do-lis-input"
-import ToDoListSelect from "./to-do-list-select"
-import ToDoListButton from "./to-do-list-button"
-import TaskList from "./task-list"
+import type { Task } from "@/views/apartment/todolist/to-do-list.types"
+import ToDoListInput from "./components/to-do-list-input"
+import ToDoListSelect from "./components/to-do-list-select"
+import ToDoListButton from "./components/to-do-list-button"
+import TaskList from "./components/task-list"
 import { GridLayout } from "@/views/apartment/components/grid-layout"
-import PanelGroupHeader from "./panel-grup-header"
-import ToDoListPrioritySelect from "./to-do-list-priority-select"
+import PanelGroupHeader from "./components/panel-grup-header"
+import ToDoListPrioritySelect from "./components/to-do-list-priority-select"
 
 interface ToDoListMainProps {
 	tasks: Task[]
@@ -14,12 +14,14 @@ interface ToDoListMainProps {
 	setNewTask: (value: string) => void
 	selectedDay: string
 	setSelectedDay: (value: string) => void
-	priority: "high" | "medium" | "low"
+	priority: "high" | "medium" | "low" | undefined
 	setPriority: (value: "high" | "medium" | "low") => void
 	onAddTask: () => void
 	onToggleTask: (taskId: number) => void
 	currentDate: Date
 	daysOfWeek: string[]
+	isPriorityInvalid: boolean
+	setIsPriorityInvalid: (value: boolean) => void
 }
 
 export default function ToDoListMain({
@@ -34,6 +36,8 @@ export default function ToDoListMain({
 	onToggleTask,
 	currentDate,
 	daysOfWeek,
+	isPriorityInvalid,
+	setIsPriorityInvalid,
 }: ToDoListMainProps) {
 	if (!daysOfWeek || !Array.isArray(daysOfWeek)) {
 		daysOfWeek = [
@@ -56,7 +60,12 @@ export default function ToDoListMain({
 						setNewTask={setNewTask}
 						onAddTask={onAddTask}
 					/>
-					<ToDoListPrioritySelect priority={priority} setPriority={setPriority} />
+					<ToDoListPrioritySelect
+						priority={priority}
+						setPriority={setPriority}
+						isInvalid={isPriorityInvalid}
+						setIsInvalid={setIsPriorityInvalid}
+					/>
 					<ToDoListSelect selectedDay={selectedDay} setSelectedDay={setSelectedDay} />
 					<ToDoListButton onAddTask={onAddTask} />
 				</div>

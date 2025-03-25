@@ -1,6 +1,6 @@
 import { Badge } from "@ui/badge"
 import { CheckCircle2, Circle } from "lucide-react"
-import type { Task } from "../to-do-list.types"
+import type { Task } from "@/views/apartment/todolist/to-do-list.types"
 
 interface TaskListProps {
 	tasks: Task[]

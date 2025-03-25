@@ -95,7 +95,6 @@ export default function DropdownHeader() {
 						<DropdownMenuTrigger asChild>
 							<SidebarMenuButton className="w-full font-muted-foreground">
 								{selectedOption}
-
 								<ChevronDown className="ml-auto" />
 							</SidebarMenuButton>
 						</DropdownMenuTrigger>
