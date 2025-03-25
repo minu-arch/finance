@@ -12,8 +12,7 @@ import {
 } from "date-fns"
 import { ro } from "date-fns/locale"
 import { CardHeader, CardDescription, CardTitle } from "@ui/card"
-import { Button } from "@ui/button"
-import { ChevronLeft, ChevronRight, Calendar, Check } from "lucide-react"
+import { Check } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@ui/popover"
 import {
 	Command,
@@ -24,6 +23,12 @@ import {
 	CommandList,
 } from "@ui/command"
 import { cn } from "@/theme/lib/utils"
+import {
+	ButtonGoToPreviousWeek,
+	ButtonGoToNextWeek,
+	ButtonGoToToday,
+	ButtonCurrentWeek,
+} from "./components/to-do-list-header-button"
 
 interface ToDoListHeaderProps {
 	currentDate: Date
@@ -134,24 +139,11 @@ export default function ToDoListHeader({
 					Lista săptămânală de activități
 				</CardTitle>
 				<div className="flex items-center gap-2 mt-2">
-					<Button
-						variant="outline"
-						size="icon"
-						onClick={goToPreviousWeek}
-						aria-label="Săptămâna anterioară"
-					>
-						<ChevronLeft className="size-4" />
-					</Button>
+					<ButtonGoToPreviousWeek goToPreviousWeek={goToPreviousWeek} />
 
 					<Popover open={open} onOpenChange={setOpen}>
 						<PopoverTrigger asChild>
-							<Button
-								variant="outline"
-								className={cn("justify-center text-left font-normal", "px-3 py-1.5")}
-							>
-								<Calendar className="mr-2 size-4" />
-								<span>Săptămâna {currentWeekNumber}</span>
-							</Button>
+							<ButtonCurrentWeek currentWeekNumber={currentWeekNumber} />
 						</PopoverTrigger>
 						<PopoverContent className="p-0 w-[300px]" align="start">
 							<Command>
@@ -191,18 +183,9 @@ export default function ToDoListHeader({
 						</PopoverContent>
 					</Popover>
 
-					<Button
-						variant="outline"
-						size="icon"
-						onClick={goToNextWeek}
-						aria-label="Săptămâna următoare"
-					>
-						<ChevronRight className="size-4" />
-					</Button>
+					<ButtonGoToNextWeek goToNextWeek={goToNextWeek} />
 
-					<Button variant="outline" size="sm" onClick={goToToday}>
-						Azi
-					</Button>
+					<ButtonGoToToday goToToday={goToToday} />
 				</div>
 			</div>
 			<CardDescription className="flex items-center justify-between">
