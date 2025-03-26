@@ -12,24 +12,12 @@ import {
 } from "date-fns"
 import { ro } from "date-fns/locale"
 import { CardHeader, CardDescription, CardTitle } from "@ui/card"
-import { Check } from "lucide-react"
-import { Popover, PopoverContent, PopoverTrigger } from "@ui/popover"
-import {
-	Command,
-	CommandEmpty,
-	CommandGroup,
-	CommandInput,
-	CommandItem,
-	CommandList,
-} from "@ui/command"
-import { cn } from "@/theme/lib/utils"
 import {
 	ButtonGoToPreviousWeek,
 	ButtonGoToNextWeek,
 	ButtonGoToToday,
-	ButtonCurrentWeek,
 } from "./components/to-do-list-header-button"
-
+import ToDoListFiltersGroup from "./components/to-do-list-filters-group"
 interface ToDoListHeaderProps {
 	currentDate: Date
 	setCurrentDate: (date: Date) => void
@@ -42,23 +30,23 @@ export default function ToDoListHeader({
 	const [open, setOpen] = useState(false)
 	const selectedWeekRef = useRef<HTMLDivElement>(null)
 
-	// Începe săptămâna lunea
+	// start of current week
 	const startOfCurrentWeek = startOfWeek(currentDate, { weekStartsOn: 1 })
 
-	// Calculează sfârșitul săptămânii (duminica)
+	// end of current week
 	const endOfCurrentWeek = endOfWeek(startOfCurrentWeek, { weekStartsOn: 1 })
 
-	// Obține numărul săptămânii curente
+	// current week number
 	const currentWeekNumber = getWeek(currentDate, { weekStartsOn: 1 })
 
-	// Generează lista de săptămâni (1 în trecut și restul anului curent)
+	// generate week options (1 week in the past and the rest of the current year)
 	const generateWeekOptions = () => {
 		const options = []
 		const today = new Date()
 		const todayWeekStart = startOfWeek(today, { weekStartsOn: 1 })
 		const selectedWeekStart = startOfCurrentWeek
 
-		// Adaugă săptămâna anterioară
+		// add previous week
 		const previousWeek = subWeeks(todayWeekStart, 1)
 		const previousWeekNumber = getWeek(previousWeek, { weekStartsOn: 1 })
 		const previousWeekEnd = endOfWeek(previousWeek, { weekStartsOn: 1 })
@@ -71,14 +59,14 @@ export default function ToDoListHeader({
 			isSelected: isSameDay(previousWeek, selectedWeekStart),
 		})
 
-		// Calculează câte săptămâni mai sunt până la sfârșitul anului
+		// calculate how many weeks are left until the end of the year
 		const yearEnd = endOfYear(today)
 		const weeksUntilYearEnd = Math.max(
 			1,
 			differenceInWeeks(yearEnd, todayWeekStart) + 1,
 		)
 
-		// Adaugă săptămâna curentă și toate săptămânile rămase din anul curent
+		// add current week and all the weeks remaining in the current year
 		for (let i = 0; i <= weeksUntilYearEnd; i++) {
 			const weekDate = addWeeks(todayWeekStart, i)
 			const weekNumber = getWeek(weekDate, { weekStartsOn: 1 })
@@ -102,7 +90,7 @@ export default function ToDoListHeader({
 
 	const weekOptions = generateWeekOptions()
 
-	// Efect pentru a face scroll la săptămâna selectată când se deschide popover-ul
+	// effect to scroll to the selected week when the popover is opened
 	useEffect(() => {
 		if (open && selectedWeekRef.current) {
 			setTimeout(() => {
@@ -141,48 +129,14 @@ export default function ToDoListHeader({
 				<div className="flex items-center gap-2 mt-2">
 					<ButtonGoToPreviousWeek goToPreviousWeek={goToPreviousWeek} />
 
-					<Popover open={open} onOpenChange={setOpen}>
-						<PopoverTrigger asChild>
-							<ButtonCurrentWeek currentWeekNumber={currentWeekNumber} />
-						</PopoverTrigger>
-						<PopoverContent className="p-0 w-[300px]" align="start">
-							<Command>
-								<CommandInput placeholder="Caută săptămâna..." />
-								<CommandList className="max-h-[300px]">
-									<CommandEmpty>Nu s-a găsit nicio săptămână.</CommandEmpty>
-									<CommandGroup>
-										{weekOptions.map((option) => (
-											<CommandItem
-												key={option.value}
-												value={option.value}
-												onSelect={handleSelectWeek}
-												ref={option.isSelected ? selectedWeekRef : null}
-												className={cn(
-													"transition-colors",
-													option.isSelected && "font-medium",
-												)}
-											>
-												<div className="flex items-center justify-between w-full">
-													<div className="flex flex-col">
-														<div className="flex items-center">
-															<span>{option.label}</span>
-														</div>
-														<span className="text-xs text-muted-foreground">
-															{option.dateRange}
-														</span>
-													</div>
-													{option.isSelected && (
-														<Check className="size-4 text-primary" />
-													)}
-												</div>
-											</CommandItem>
-										))}
-									</CommandGroup>
-								</CommandList>
-							</Command>
-						</PopoverContent>
-					</Popover>
-
+					<ToDoListFiltersGroup
+						open={open}
+						setOpen={setOpen}
+						currentWeekNumber={currentWeekNumber}
+						weekOptions={weekOptions}
+						handleSelectWeek={handleSelectWeek}
+						selectedWeekRef={selectedWeekRef as React.RefObject<HTMLDivElement>}
+					/>
 					<ButtonGoToNextWeek goToNextWeek={goToNextWeek} />
 
 					<ButtonGoToToday goToToday={goToToday} />
