@@ -170,7 +170,6 @@ const MonthlyCards = memo(function MonthlyCards() {
 	)
 })
 
-// principal component
 export function ApartmentStatsOverview() {
 	return (
 		<div className="space-y-6">
