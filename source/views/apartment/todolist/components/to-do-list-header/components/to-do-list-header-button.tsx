@@ -16,6 +16,7 @@ interface ButtonGoToPreviousWeekProps {
 
 interface ButtonCurrentWeekProps {
 	currentWeekNumber: number
+	onClick?: () => void
 }
 
 export const ButtonGoToNextWeek = ({ goToNextWeek }: ButtonGoToNextWeekProps) => {
@@ -54,11 +55,15 @@ export const ButtonGoToPreviousWeek = ({
 	)
 }
 
-export const ButtonCurrentWeek = ({ currentWeekNumber }: ButtonCurrentWeekProps) => {
+export const ButtonCurrentWeek = ({
+	currentWeekNumber,
+	onClick,
+}: ButtonCurrentWeekProps) => {
 	return (
 		<Button
 			variant="outline"
 			className={cn("justify-center text-left font-normal", "px-3 py-1.5")}
+			onClick={onClick}
 		>
 			<Calendar className="mr-2 size-4" />
 			<span>Săptămâna {currentWeekNumber}</span>

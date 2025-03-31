@@ -7,20 +7,21 @@ import {
 	CommandItem,
 	CommandList,
 } from "@ui/command"
-import { Check } from "lucide-react"
+import { Calendar, Check } from "lucide-react"
 import { cn } from "@/theme/lib/utils"
-import { ButtonCurrentWeek } from "./to-do-list-header-button"
+import { Button } from "@ui/button"
 
 interface ToDoListFiltersGroupProps {
 	open: boolean
 	setOpen: (open: boolean) => void
 	currentWeekNumber: number
-	weekOptions: {
+	weekOptions: Array<{
 		value: string
 		label: string
 		dateRange: string
+		isToday: boolean
 		isSelected: boolean
-	}[]
+	}>
 	handleSelectWeek: (value: string) => void
 	selectedWeekRef: React.RefObject<HTMLDivElement>
 }
@@ -35,7 +36,13 @@ export default function ToDoListFiltersGroup({
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>
-				<ButtonCurrentWeek currentWeekNumber={currentWeekNumber} />
+				<Button
+					variant="outline"
+					className={cn("justify-center text-left font-normal", "px-3 py-1.5")}
+				>
+					<Calendar className="mr-2 size-4" />
+					<span>Săptămâna {currentWeekNumber}</span>
+				</Button>
 			</PopoverTrigger>
 			<PopoverContent className="p-0 w-[300px]" align="start">
 				<Command>
