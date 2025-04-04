@@ -53,7 +53,7 @@ export default function RowActions({ row }: { row: Row<Apartment> }) {
 							<DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
 						</DropdownMenuItem>
 					</DropdownMenuGroup>
-					<DropdownMenuSeparator />
+					{/* <DropdownMenuSeparator />
 					<DropdownMenuGroup>
 						<DropdownMenuSub>
 							<DropdownMenuSubTrigger>More</DropdownMenuSubTrigger>
@@ -78,7 +78,7 @@ export default function RowActions({ row }: { row: Row<Apartment> }) {
 					<DropdownMenuItem className="text-destructive focus:text-destructive">
 						<span>Delete</span>
 						<DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-					</DropdownMenuItem>
+					</DropdownMenuItem> */}
 				</DropdownMenuContent>
 			</DropdownMenu>
 
