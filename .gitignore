@@ -7,9 +7,11 @@
 
 # Cursor rules
 .cursorrules
+/.cursor/rules/
 
 # Hono API
 /source/views/dashboard/apartments/index.ts
 
 # Axios API
 /source/views/dashboard/apartments/apartment.ts
+

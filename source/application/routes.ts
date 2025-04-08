@@ -3,7 +3,8 @@ import { type RouteConfig, index, layout, route } from "@react-router/dev/routes
 export default [
 	// loading page
 	index("../views/main.tsx"),
-
+	// testing
+	route("contact", "../components/testing/contact-view.tsx"),
 	// auth
 	route("auth", "../views/auth/layout.tsx", [
 		index("../views/auth/login/login.tsx"),
