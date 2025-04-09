@@ -3,7 +3,11 @@ import PasswordInput from "./password-input"
 import LoginOption from "./login-option"
 import LoginButtons from "./login-buttons"
 
-const LoginForm = () => {
+interface LoginFormProps {
+	onLoginSuccess: () => void
+}
+
+const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
 	return (
 		<div>
 			<div className="grid gap-4">
@@ -12,7 +16,7 @@ const LoginForm = () => {
 					<PasswordInput />
 				</div>
 				<LoginOption />
-				<LoginButtons />
+				<LoginButtons onLoginSuccess={onLoginSuccess} />
 			</div>
 		</div>
 	)

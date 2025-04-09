@@ -1,12 +1,14 @@
 import { Button } from "@ui/button"
 import { FcGoogle } from "react-icons/fc"
-import { useNavigate } from "react-router"
 
-const LoginButtons = () => {
-	const navigate = useNavigate()
+interface LoginButtonsProps {
+	onLoginSuccess: () => void
+}
+
+const LoginButtons = ({ onLoginSuccess }: LoginButtonsProps) => {
 	const handleContinue = () => {
 		console.log("Continue")
-		navigate("/apartment/")
+		onLoginSuccess()
 	}
 	return (
 		<div className="flex flex-col gap-2">
