@@ -16,16 +16,15 @@ export function ValidationLoader({ onValidationComplete }: ValidationLoaderProps
 				await new Promise((resolve) => setTimeout(resolve, 2000))
 
 				// redirect to dashboard
-				navigate("/apartment")
-				onValidationComplete()
+				navigate("/apartment", { replace: true })
 			} catch (error) {
 				console.error("Eroare la validare:", error)
-				navigate("/auth/login")
+				navigate("/auth/login", { replace: true })
 			}
 		}
 
 		validateUser()
-	}, [navigate, onValidationComplete])
+	}, [navigate])
 
 	return (
 		<div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">

@@ -3,15 +3,13 @@ import { ModeToggle } from "@ui/mode-toggle"
 import { MainImg } from "@/components/welcome/svg-icons"
 import LoginForm from "@/views/auth/login/components/login-form"
 import LoginHeader from "@/views/auth/login/components/login-header"
-import LoginFooter from "@/views/auth/login/components/login-footer"
 import { ValidationLoader } from "./components/validation-loader"
 
 export default function Login() {
 	const [isValidating, setIsValidating] = useState(false)
 
 	const handleValidationComplete = () => {
-		setIsValidating(false)
-		// here you can add the logic for redirecting to dashboard
+		// do not update the state here, let the navigation handle it
 	}
 
 	if (isValidating) {
@@ -29,7 +27,6 @@ export default function Login() {
 							<div className="w-full rounded-md bg-background">
 								<LoginForm onLoginSuccess={() => setIsValidating(true)} />
 							</div>
-							{/* <LoginFooter /> */}
 						</div>
 					</div>
 
