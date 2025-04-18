@@ -7,6 +7,7 @@ export type Apartment = {
 	rooms: number
 	checkIn: string | null
 	checkOut: string | null
+	source: "Booking" | "Manual" | null
 }
 
 export const mockData: Apartment[] = [
@@ -19,6 +20,7 @@ export const mockData: Apartment[] = [
 		rooms: 2,
 		checkIn: "2024-03-01",
 		checkOut: "2024-04-01",
+		source: "Manual",
 	},
 	{
 		id: "2",
@@ -29,6 +31,7 @@ export const mockData: Apartment[] = [
 		rooms: 2,
 		checkIn: "2024-03-01",
 		checkOut: "2024-04-01",
+		source: "Booking",
 	},
 	{
 		id: "3",
@@ -39,6 +42,7 @@ export const mockData: Apartment[] = [
 		rooms: 2,
 		checkIn: "2024-03-01",
 		checkOut: "2024-04-01",
+		source: "Manual",
 	},
 	{
 		id: "4",
@@ -49,5 +53,6 @@ export const mockData: Apartment[] = [
 		rooms: 2,
 		checkIn: "2024-03-01",
 		checkOut: "2024-04-01",
+		source: null,
 	},
 ]

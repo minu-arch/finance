@@ -6,6 +6,8 @@ import FormPrice from "./form-components/form-price"
 import FormRooms from "./form-components/form-rooms"
 import FormCheckIn from "./form-components/form-check-in"
 import FormCheckOut from "./form-components/form-check-out"
+import FormSource from "./form-components/form-source"
+
 export default function ModalForm({
 	formData,
 	setFormData,
@@ -15,6 +17,7 @@ export default function ModalForm({
 			<FormName formData={formData} setFormData={setFormData} />
 			<FormLocation formData={formData} setFormData={setFormData} />
 			<FormStatus formData={formData} setFormData={setFormData} />
+			<FormSource formData={formData} setFormData={setFormData} />
 			<FormPrice formData={formData} setFormData={setFormData} />
 			<FormRooms formData={formData} setFormData={setFormData} />
 			<FormCheckIn formData={formData} setFormData={setFormData} />
